@@ -1,0 +1,37 @@
+2026-08-21
+
+Command:
+.\.venv\Scripts\python.exe -m unittest discover -s experiments\03-dapr-agents -p 'test_*.py' -v
+
+Result:
+test_action_must_match_exact_permitted_remediation ... ok
+test_inspection_is_limited_to_incident_service ... ok
+test_only_action_tool_requires_approval ... ok
+test_simulated_action_is_process_idempotent ... ok
+
+Ran 4 tests in 0.001s
+OK
+
+Recovery probe:
+- Instance recovery-20260821-02 reached its external approval wait.
+- The app and sidecar were stopped.
+- The same app ID and workflow definitions were restarted.
+- Persisted status before approval was RUNNING.
+- An approve event was delivered after restart.
+- Final workflow status was COMPLETED.
+- The simulated action result was persisted with replayed=false.
+
+Duplicate recovery probe:
+- A second workflow used the same delivery id after another app/sidecar restart.
+- Final workflow status was COMPLETED.
+- The persisted simulated action returned replayed=true.
+- The one-second completion drain avoided the earlier reminder-cleanup race.
+
+Teardown:
+- dapr uninstall --all completed successfully against the workspace-local
+  runtime path.
+- Removed containers: dapr_placement, dapr_scheduler, dapr_redis, dapr_zipkin.
+- Removed the dapr_scheduler volume and workspace-local runtime files.
+- Final Docker inspection found no remaining dapr_* containers.
+- Removed the ignored workspace-local .venv and .local-tools directories after
+  capturing and validating the committed evidence.

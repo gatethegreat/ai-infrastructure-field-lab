@@ -1,0 +1,25 @@
+Research date: 2026-08-21
+Runtime: Python 3.12.10
+
+Command: python -m unittest discover -s experiments/00-baseline -p 'test_*.py' -v
+Result: 7 tests passed
+
+Command: python -m unittest discover -s experiments/01-openenv -p 'test_live_agent.py' -v
+Result: 6 tests passed
+
+Command: .\.venv\Scripts\python.exe -m unittest discover -s experiments/01-openenv -p 'test_incident_environment.py' -v
+Result: 6 tests passed
+
+Total: 19 deterministic tests passed
+
+Covered boundaries:
+- baseline validation, approvals, idempotency, and correlated evidence;
+- one read-only model tool and one typed proposal;
+- unavailable-tool rejection;
+- cross-service inspection rejection;
+- permitted-remediation enforcement;
+- untrusted-note authority isolation; and
+- OpenAI Responses request/response adapter contract;
+- OpenEnv typed reset, inspect, propose, approve, execute, and replay;
+- deterministic deny, revise, and expiry transitions; and
+- one authoritative effect across repeated execution and episodes.

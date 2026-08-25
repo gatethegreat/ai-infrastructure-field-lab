@@ -1,0 +1,25 @@
+FROM rust:1.90.0-bookworm@sha256:3914072ca0c3b8aad871db9169a651ccfce30cf58303e5d6f2db16d1d8a7e58f AS builder
+
+ARG DOGWOOD_SHA=c6237c88099b3f492ecc5fcee42df06a19224b97
+ARG RESOLVED_LOCK_SHA=641e58a66e34ce83f1238d7b3333a93b0b0b4d37c9982ec275592c8f5dd3571e
+
+# The published commit's Cargo.lock is stale relative to its manifests.
+# Cargo updates only that pinned checkout's lock before compiling.
+RUN git clone https://github.com/dogwood-policy/dogwood.git /src/dogwood \
+    && cd /src/dogwood \
+    && git checkout --detach "${DOGWOOD_SHA}" \
+    && test "$(git rev-parse HEAD)" = "${DOGWOOD_SHA}" \
+    && cargo build --release -p amzn-dogwood-cli \
+    && test "$(sha256sum Cargo.lock | cut -d' ' -f1)" = "${RESOLVED_LOCK_SHA}"
+
+FROM debian:bookworm-slim@sha256:abd67ffcfa541b485a3dff59865ab629aa048a6c613e639d36e7456b0b229241
+
+COPY --from=builder /src/dogwood/target/release/dogwood /usr/local/bin/dogwood
+COPY --from=builder /src/dogwood/LICENSE /usr/share/licenses/dogwood/LICENSE
+COPY --from=builder /src/dogwood/NOTICE /usr/share/licenses/dogwood/NOTICE
+
+WORKDIR /lab
+LABEL org.opencontainers.image.source="https://github.com/dogwood-policy/dogwood" \
+      org.opencontainers.image.revision="c6237c88099b3f492ecc5fcee42df06a19224b97" \
+      org.opencontainers.image.version="1.0.0"
+ENTRYPOINT ["dogwood"]

@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-08-21T14:45:25Z",
+  "dapr_agents_version": "1.0.5",
+  "dapr_cli_version": "1.18.2",
+  "dapr_runtime_version": "1.18.3",
+  "official_echo_example": {
+    "result": "passed",
+    "source": "examples/01-llm-call-dapr/text_completion.py",
+    "component": "conversation.echo",
+    "observed_outputs": [
+      "Response: Name a famous dog!",
+      "Response with user input: hello"
+    ],
+    "proves": "DaprChatClient reached a Dapr conversation component through a local sidecar",
+    "does_not_prove": "model reasoning or tool selection"
+  },
+  "official_durable_example": {
+    "result": "partial",
+    "source": "quickstarts/02_durable_agent_workflow.py",
+    "trigger_source": "quickstarts/02_durable_agent_trigger.py",
+    "initial_failure": "DaprWorkflowClient does not support the context manager protocol",
+    "upstream_helper_location": "dapr_agents.workflow.utils.core.trigger_agent",
+    "compatibility_probe": "Added temporary __enter__ and __exit__ methods that return the client and call close",
+    "workflow_status_after_probe": "COMPLETED",
+    "workflow_result_kind": "Echoed assistant content with no executed tool calls",
+    "additional_observation": "Echo emitted malformed synthetic tool-call arguments and conversation-summary parsing failed, but the workflow still reported COMPLETED",
+    "proves": "Redis-backed Dapr Workflow scheduling and completion can carry a DurableAgent invocation",
+    "does_not_prove": "valid model-driven tool calling, approval, or correct summarization"
+  }
+}

@@ -1,0 +1,12 @@
+Research date: 2026-08-21
+
+Removed:
+- <WORKSPACE>\.venv
+
+Final state:
+- isolated OpenEnv virtual environment exists: false
+- OpenEnv-created local processes, containers, databases, or cloud resources: none
+- ignored .env.local retained for later approved model experiments: true
+- post-teardown repository test discovery: 13 passed, 6 OpenEnv tests skipped
+
+The OpenEnv-enabled run before teardown passed all 19 deterministic tests.

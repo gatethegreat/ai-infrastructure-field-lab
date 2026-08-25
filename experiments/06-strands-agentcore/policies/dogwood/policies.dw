@@ -1,0 +1,61 @@
+// This assembled policy set is generated manually from the four reviewed files.
+// Keep the source files separate for review and this file byte-equivalent in meaning.
+
+@id("allow_lookup")
+permit (principal, action == Drupe::Action::"lookup_record", resource);
+
+@id("allow_record_approval")
+permit (principal, action == Drupe::Action::"record_human_approval", resource);
+
+@id("allow_operation_status")
+permit (principal, action == Drupe::Action::"get_operation_status", resource);
+
+@id("allow_write_after_matching_lookup_and_fresh_single_use_approval")
+permit (principal, action == Drupe::Action::"execute_write", resource)
+when temporal {
+    formerly within 10m Drupe::Action::"lookup_record"::response{
+        output.record_id: context.input.record_id
+    }
+    && formerly within 5m Drupe::Action::"record_human_approval"::response{
+        output.record_id: context.input.record_id,
+        output.approval_id: context.input.change.approval_id,
+        output.approved: true
+    }
+    && !Drupe::Action::"execute_write"::response{
+        input.record_id: context.input.record_id,
+        input.change.approval_id: context.input.change.approval_id,
+        output.status: "SUCCEEDED"
+    }
+       since within 5m Drupe::Action::"record_human_approval"::response{
+        output.record_id: context.input.record_id,
+        output.approval_id: context.input.change.approval_id,
+        output.approved: true
+    }
+};
+
+@id("deny_after_three_successful_writes")
+forbid (principal, action == Drupe::Action::"execute_write", resource)
+when temporal {
+    exists (n: Long).
+        (count for (t: Timepoint).
+            where (formerly within 24h (
+                Drupe::Action::"execute_write"::response{
+                    output.status: "SUCCEEDED"
+                } && tp(t)
+            ))) == n
+        && n >= 3
+};
+
+@id("deny_after_three_failed_write_attempts")
+forbid (principal, action == Drupe::Action::"execute_write", resource)
+when temporal {
+    exists (n: Long).
+        (count for (t: Timepoint).
+            where (formerly within 1h (
+                Drupe::Action::"execute_write"::response{
+                    output.approval_id: context.input.change.approval_id,
+                    output.status: "FAILED"
+                } && tp(t)
+            ))) == n
+        && n >= 3
+};

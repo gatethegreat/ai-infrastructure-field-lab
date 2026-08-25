@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "verified_at": "2000-01-01T01:04:54+00:00",
+  "verified_at_utc": "2000-01-01T01:04:54Z",
+  "region": "us-east-1",
+  "verification_source": "direct read-only AWS CLI checks after the guarded teardown",
+  "authorization_stack": "absent",
+  "rate_limit_stack": "absent",
+  "synthetic_lambda": "absent",
+  "synthetic_log_group_count": 0,
+  "generated_dynamodb_table_count": 0,
+  "generated_iam_role_count": 0,
+  "experiment_policy_engine_count": 0,
+  "account_gateway_count": 2,
+  "preflight_account_gateway_count": 2,
+  "returned_to_preflight_gateway_count": true,
+  "identifiers_redacted": true,
+  "notes": "Counts are limited to the exact experiment resources or deterministic AgentCorePolicyLab name prefix. Account IDs, ARNs, resource IDs, and credentials are intentionally omitted."
+}

@@ -1,0 +1,8 @@
+[
+  {"ParameterKey": "LabName", "ParameterValue": "AgentCorePolicyLab"},
+  {"ParameterKey": "CallerPrincipalArn", "ParameterValue": "<OPERATOR_PRINCIPAL_ARN>"},
+  {"ParameterKey": "PolicyEngineMode", "ParameterValue": "LOG_ONLY"},
+  {"ParameterKey": "PolicyEnforcementMode", "ParameterValue": "LOG_ONLY"},
+  {"ParameterKey": "SessionWriteLimit", "ParameterValue": "3"},
+  {"ParameterKey": "RetryLimit", "ParameterValue": "3"}
+]

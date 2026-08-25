@@ -1,0 +1,127 @@
+namespace Drupe {
+  type SystemContext = {
+    now: datetime
+  };
+
+  type execute_writeInput = {
+    change: Drupe::execute_write_Input_change,
+    record_id: String
+  };
+
+  type execute_writeOutput = {
+    approval_id: String,
+    change_id: String,
+    operation_id: String,
+    record_id: String,
+    status: String
+  };
+
+  type get_operation_statusInput = {
+    operation_id: String
+  };
+
+  type get_operation_statusOutput = {
+    operation_id: String,
+    status: String
+  };
+
+  type lookup_recordInput = {
+    record_id: String
+  };
+
+  type lookup_recordOutput = {
+    found: Bool,
+    record_id: String,
+    value: String
+  };
+
+  type record_human_approvalInput = {
+    approval_id: String,
+    expires_at: Long,
+    record_id: String
+  };
+
+  type record_human_approvalOutput = {
+    approval_id: String,
+    approved: Bool,
+    expires_at: Long,
+    record_id: String
+  };
+
+  entity Gateway;
+
+  entity User;
+
+  type execute_write_Input_change = {
+    approval_id: String,
+    change_id: String,
+    force_error?: Bool,
+    value: String
+  };
+
+  action "CallTool" in [Action::"Mcp"] appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      isOutput: Bool,
+      output?: {      },
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+
+  action "Mcp" appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      isOutput: Bool,
+      output?: {      },
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+
+  action "execute_write" in [Action::"CallTool"] appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      input: execute_writeInput,
+      output?: execute_writeOutput,
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+
+  action "get_operation_status" in [Action::"CallTool"] appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      input: get_operation_statusInput,
+      output?: get_operation_statusOutput,
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+
+  action "lookup_record" in [Action::"CallTool"] appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      input: lookup_recordInput,
+      output?: lookup_recordOutput,
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+
+  action "record_human_approval" in [Action::"CallTool"] appliesTo {
+    principal: [User],
+    resource: [Gateway],
+    context: {
+      input: record_human_approvalInput,
+      output?: record_human_approvalOutput,
+      sessionId: String,
+      system: SystemContext
+    }
+  };
+}

@@ -1,0 +1,31 @@
+{
+  "batch_id": "8d21c017f03f",
+  "ended_at": "2000-01-01T00:47:19.680938+00:00",
+  "events": 60,
+  "execution_layer": "agentcore_managed",
+  "expectation_mismatches": 0,
+  "false_allows": 0,
+  "false_denials": 0,
+  "inter_step_delay_applied": true,
+  "inter_step_delay_seconds": 1.0,
+  "measured_repetitions": 10,
+  "mode": "managed_temporal",
+  "observability_error_count": 1,
+  "raw_evidence_location": "private ignored directory; not committed",
+  "region": "us-east-1",
+  "request_ids_captured": 60,
+  "runs": 10,
+  "scenario_ids": [
+    "S08"
+  ],
+  "schema_version": "1.0",
+  "started_at": "2000-01-01T00:45:55.737023+00:00",
+  "temporal_latency_average_ms": {
+    "max": 47.5625,
+    "median": 43.25,
+    "min": 38.9375,
+    "samples": 4
+  },
+  "temporal_latency_metric_queries": 2,
+  "warmups_per_scenario": 1
+}

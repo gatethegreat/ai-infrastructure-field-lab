@@ -1,0 +1,482 @@
+{
+  "01_happy_and_single_use.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 2,
+        "timestamp": 4,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 3,
+        "timestamp": 6,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 740.9202,
+      "median": 683.72615,
+      "min": 640.1241,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "02_write_without_history.log": {
+    "actual": [
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 735.0768,
+      "median": 683.77035,
+      "min": 658.75,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "03_identifier_mismatch.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 2,
+        "timestamp": 4,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 717.169,
+      "median": 669.0805,
+      "min": 637.3236,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "04_fixed_freshness_expired.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 2,
+        "timestamp": 304,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 723.4817,
+      "median": 670.0768,
+      "min": 648.8321,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "05_caller_and_session_isolation.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "deny",
+      "deny",
+      "allow"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 2,
+        "timestamp": 4,
+        "verdict": "deny"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 3,
+        "timestamp": 5,
+        "verdict": "deny"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 4,
+        "timestamp": 6,
+        "verdict": "allow"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "deny",
+      "deny",
+      "allow"
+    ],
+    "latency_ms": {
+      "max": 687.6698,
+      "median": 664.31,
+      "min": 531.9738,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "06_retry_cap.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 4,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 2,
+        "timestamp": 6,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          5
+        ],
+        "errors": [],
+        "index": 3,
+        "timestamp": 8,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 746.6352,
+      "median": 643.00735,
+      "min": 537.6772,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "07_success_cap.log": {
+    "actual": [
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 2,
+        "timestamp": 4,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 3,
+        "timestamp": 6,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 4,
+        "timestamp": 8,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 5,
+        "timestamp": 10,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          3
+        ],
+        "errors": [],
+        "index": 6,
+        "timestamp": 12,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          1
+        ],
+        "errors": [],
+        "index": 7,
+        "timestamp": 14,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [
+          4
+        ],
+        "errors": [],
+        "index": 8,
+        "timestamp": 16,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 725.1188,
+      "median": 683.4095,
+      "min": 656.7852,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "08_lookup_without_approval.log": {
+    "actual": [
+      "allow",
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [
+          0
+        ],
+        "errors": [],
+        "index": 0,
+        "timestamp": 0,
+        "verdict": "allow"
+      },
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 1,
+        "timestamp": 2,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "allow",
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 694.0432,
+      "median": 677.61115,
+      "min": 646.0798,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  },
+  "09_wrong_approval_id.log": {
+    "actual": [
+      "deny"
+    ],
+    "details": [
+      {
+        "determining_rules": [],
+        "errors": [],
+        "index": 0,
+        "timestamp": 2,
+        "verdict": "deny"
+      }
+    ],
+    "expected": [
+      "deny"
+    ],
+    "latency_ms": {
+      "max": 726.3281,
+      "median": 677.317,
+      "min": 659.3675,
+      "samples": 10
+    },
+    "latency_note": "end-to-end Docker CLI replay latency; not isolated policy-engine latency",
+    "matched": true
+  }
+}

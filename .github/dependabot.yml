@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: npm
+    directory: /experiments/04-vercel/official-minimal
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: pip
+    directory: /experiments/03-dapr-agents
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: pip
+    directory: /experiments/06-strands-agentcore
+    schedule:
+      interval: monthly
+
+  - package-ecosystem: docker
+    directory: /experiments/06-strands-agentcore/docker
+    schedule:
+      interval: monthly

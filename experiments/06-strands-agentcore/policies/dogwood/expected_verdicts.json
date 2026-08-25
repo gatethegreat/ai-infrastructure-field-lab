@@ -1,0 +1,11 @@
+{
+  "01_happy_and_single_use.log": ["allow", "allow", "allow", "deny"],
+  "02_write_without_history.log": ["deny"],
+  "03_identifier_mismatch.log": ["allow", "allow", "deny"],
+  "04_fixed_freshness_expired.log": ["allow", "allow", "deny"],
+  "05_caller_and_session_isolation.log": ["allow", "allow", "deny", "deny", "allow"],
+  "06_retry_cap.log": ["allow", "allow", "allow", "deny"],
+  "07_success_cap.log": ["allow", "allow", "allow", "allow", "allow", "allow", "allow", "allow", "deny"],
+  "08_lookup_without_approval.log": ["allow", "deny"],
+  "09_wrong_approval_id.log": ["deny"]
+}

@@ -1,0 +1,248 @@
+{
+  "engine": {
+    "createdAt": "2000-01-01T00:00:00.000000+00:00",
+    "description": "Synthetic temporal authorization test engine.",
+    "name": "AgentCorePolicyLab_Engine",
+    "policyEngineArn": "<REDACTED_SESSION>",
+    "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+    "status": "ACTIVE",
+    "statusReasons": [],
+    "updatedAt": "2000-01-01T00:00:07.924520+00:00"
+  },
+  "gateway": {
+    "authorizerType": "AWS_IAM",
+    "createdAt": "2000-01-01T00:01:02.698336+00:00",
+    "description": "Synthetic authenticated MCP tools for policy comparison.",
+    "gatewayArn": "<REDACTED_SESSION>",
+    "gatewayId": "gateway-000001",
+    "gatewayUrl": "https://gateway-000001.example.invalid/mcp",
+    "name": "AgentCorePolicyLab-Gateway",
+    "policyEngineConfiguration": {
+      "arn": "<REDACTED_SESSION>",
+      "mode": "ENFORCE"
+    },
+    "protocolConfiguration": {
+      "mcp": {
+        "instructions": "Use only synthetic record identifiers and values.",
+        "supportedVersions": [
+          "2025-06-18"
+        ]
+      }
+    },
+    "protocolType": "MCP",
+    "roleArn": "<REDACTED_SESSION>",
+    "status": "READY",
+    "updatedAt": "2000-01-01T00:03:33.047647+00:00",
+    "workloadIdentityDetails": {
+      "workloadIdentityArn": "<REDACTED_SESSION>"
+    }
+  },
+  "policies": {
+    "policies": [
+      {
+        "createdAt": "2000-01-01T00:01:33.606359+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___record_human_approval\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit approval recording for the primary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_ApprovalPrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_ApprovalPrimary-qvyahb7gdi",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:04:02.357947+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:38.591372+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___record_human_approval\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit approval recording for the secondary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_ApprovalSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_ApprovalSecondary-llm_r2ryv7",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:03:58.453748+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:29.293803+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___lookup_record\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit lookup for the primary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_LookupPrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_LookupPrimary-f68nel2s_5",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:03:59.336111+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:28.950160+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___lookup_record\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit lookup for the secondary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_LookupSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_LookupSecondary-sz2jbtjnel",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:03:57.137402+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:49.998189+00:00",
+        "definition": {
+          "policy": {
+            "statement": "forbid (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  exists (sameChangeResponses: Long).\n    (count for (t: Timepoint).\n      where (formerly within 1h (AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n        eventResource: resource,\n        input.change.change_id: context.input.change.change_id,\n        output.status: \"FAILED\"\n      } && tp(t)))) == sameChangeResponses\n    && sameChangeResponses >= 3\n};\n"
+          }
+        },
+        "description": "Enforce the same-change retry cap for the primary caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_RetryCapPrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_RetryCapPrimary-69olqi0g93",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:27:04.251612+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:49.949302+00:00",
+        "definition": {
+          "policy": {
+            "statement": "forbid (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  exists (sameChangeResponses: Long).\n    (count for (t: Timepoint).\n      where (formerly within 1h (AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n        eventResource: resource,\n        input.change.change_id: context.input.change.change_id,\n        output.status: \"FAILED\"\n      } && tp(t)))) == sameChangeResponses\n    && sameChangeResponses >= 3\n};\n"
+          }
+        },
+        "description": "Enforce the same-change retry cap for the secondary caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_RetryCapSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_RetryCapSecondary-2nky8yn3rv",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:27:12.693221+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:49.850504+00:00",
+        "definition": {
+          "policy": {
+            "statement": "forbid (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  exists (successfulWrites: Long).\n    (count for (t: Timepoint).\n      where (formerly within 24h (AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n        eventResource: resource,\n        output.status: \"SUCCEEDED\"\n      } && tp(t)))) == successfulWrites\n    && successfulWrites >= 3\n};\n"
+          }
+        },
+        "description": "Enforce the successful write cap for the primary caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_SessionCapPrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_SessionCapPrimary-_kbl6912gw",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:27:12.943046+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:50.079382+00:00",
+        "definition": {
+          "policy": {
+            "statement": "forbid (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  exists (successfulWrites: Long).\n    (count for (t: Timepoint).\n      where (formerly within 24h (AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n        eventResource: resource,\n        output.status: \"SUCCEEDED\"\n      } && tp(t)))) == successfulWrites\n    && successfulWrites >= 3\n};\n"
+          }
+        },
+        "description": "Enforce the successful write cap for the secondary caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_SessionCapSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_SessionCapSecondary-hdwbvjljba",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:27:05.201492+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:33.964240+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___get_operation_status\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit status lookup for the primary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_StatusPrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_StatusPrimary-stl1kozhr2",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:03:49.762577+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:38.589394+00:00",
+        "definition": {
+          "cedar": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___get_operation_status\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n);\n"
+          }
+        },
+        "description": "Permit status lookup for the secondary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_StatusSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_StatusSecondary-j8zto42p74",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:04:06.597180+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:38.203449+00:00",
+        "definition": {
+          "policy": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  formerly within 10m AgentCore::Action::\"SyntheticTools___lookup_record\"::response{\n    eventResource: resource,\n    output.record_id: context.input.record_id\n  }\n  && !AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n    eventResource: resource,\n    output.approval_id: context.input.change.approval_id,\n    output.status: \"SUCCEEDED\"\n  }\n  since within 5m AgentCore::Action::\"SyntheticTools___record_human_approval\"::response{\n    eventResource: resource,\n    input.record_id: context.input.record_id,\n    input.approval_id: context.input.change.approval_id,\n    output.valid: true\n  }\n};\n"
+          }
+        },
+        "description": "Temporal write permit for the primary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_WritePrimary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_WritePrimary-olz3xepfgc",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:26:38.280856+00:00"
+      },
+      {
+        "createdAt": "2000-01-01T00:01:38.539241+00:00",
+        "definition": {
+          "policy": {
+            "statement": "permit (\n  principal == AgentCore::IamEntity::\"<REDACTED_SESSION>\",\n  action == AgentCore::Action::\"SyntheticTools___execute_write\",\n  resource == AgentCore::Gateway::\"<REDACTED_SESSION>\"\n)\nwhen temporal {\n  formerly within 10m AgentCore::Action::\"SyntheticTools___lookup_record\"::response{\n    eventResource: resource,\n    output.record_id: context.input.record_id\n  }\n  && !AgentCore::Action::\"SyntheticTools___execute_write\"::response{\n    eventResource: resource,\n    output.approval_id: context.input.change.approval_id,\n    output.status: \"SUCCEEDED\"\n  }\n  since within 5m AgentCore::Action::\"SyntheticTools___record_human_approval\"::response{\n    eventResource: resource,\n    input.record_id: context.input.record_id,\n    input.approval_id: context.input.change.approval_id,\n    output.valid: true\n  }\n};\n"
+          }
+        },
+        "description": "Temporal write permit for the secondary synthetic caller.",
+        "enforcementMode": "ACTIVE",
+        "name": "AgentCorePolicyLab_WriteSecondary",
+        "policyArn": "<REDACTED_SESSION>",
+        "policyEngineId": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+        "policyId": "AgentCorePolicyLab_WriteSecondary-6k4tjwzr9f",
+        "status": "ACTIVE",
+        "statusReasons": [],
+        "updatedAt": "2000-01-01T00:26:41.290572+00:00"
+      }
+    ]
+  }
+}

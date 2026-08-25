@@ -1,0 +1,17 @@
+@id("deny_after_three_failed_write_attempts")
+forbid (
+    principal,
+    action == Drupe::Action::"execute_write",
+    resource
+)
+when temporal {
+    exists (n: Long).
+        (count for (t: Timepoint).
+            where (formerly within 1h (
+                Drupe::Action::"execute_write"::response{
+                    output.approval_id: context.input.change.approval_id,
+                    output.status: "FAILED"
+                } && tp(t)
+            ))) == n
+        && n >= 3
+};

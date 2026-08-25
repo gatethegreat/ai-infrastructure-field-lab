@@ -1,0 +1,16 @@
+{
+  "replacement": "<REDACTED>",
+  "patterns": [
+    {"name": "aws-account-id", "regex": "(?<![0-9])[0-9]{12}(?![0-9])"},
+    {"name": "aws-arn", "regex": "arn:aws(?:-[a-z0-9-]+)?:[^\\s\\\"'\\\\]+"},
+    {"name": "authorization-header", "regex": "(?i)(authorization\\s*[:=]\\s*)[^\\r\\n,}]+"},
+    {"name": "security-token", "regex": "(?i)(x-amz-security-token\\s*[:=]\\s*)[^\\r\\n,}]+"},
+    {"name": "access-key-id", "regex": "(?<![A-Z0-9])(AKIA|ASIA)[A-Z0-9]{16}(?![A-Z0-9])"},
+    {"name": "policy-session-header-json", "regex": "(?i)(\\\"x-amzn-bedrock-agentcore-policy-session-id\\\"\\s*:\\s*\\\")[^\\\"]+(\\\")", "replacement": "$1<REDACTED>$2"},
+    {"name": "policy-session-header", "regex": "(?i)(x-amzn-bedrock-agentcore-policy-session-id\\s*[:=]\\s*)[^\\r\\n,}]+"},
+    {"name": "mcp-session-header", "regex": "(?i)(mcp-session-id\\s*[:=]\\s*)[^\\r\\n,}]+"},
+    {"name": "generic-session-json", "regex": "(?i)(\\\"(?:policySessionId|policy_session_id|sessionId|session_id)\\\"\\s*:\\s*\\\")[^\\\"]+(\\\")", "replacement": "$1<REDACTED>$2"},
+    {"name": "generic-session-field", "regex": "(?i)((?:policy[_-]?session[_-]?id|session[_-]?id|sessionId)\\s*[:=]\\s*)[A-Za-z0-9._:/+\\-]+", "replacement": "$1<REDACTED>"},
+    {"name": "workload-access-token", "regex": "(?i)(x-amz-bedrock-agentcore-identity-wat\\s*[:=]\\s*)[^\\r\\n,}]+"}
+  ]
+}

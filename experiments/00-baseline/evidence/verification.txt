@@ -1,0 +1,14 @@
+Command: python -m unittest discover -s experiments/00-baseline -p 'test_*.py' -v
+Runtime: Python 3.12.10
+Research date: 2026-08-21
+
+test_approval_must_bind_to_exact_proposal ... ok
+test_contract_rejects_non_object_input ... ok
+test_duplicate_delivery_has_one_authoritative_effect ... ok
+test_happy_path_is_typed_approval_gated_and_reconstructable ... ok
+test_invalid_input_stops_before_tools ... ok
+test_non_approval_transitions_never_execute ... ok
+test_untrusted_notes_cannot_select_the_action ... ok
+
+Ran 7 tests in 0.002s
+OK

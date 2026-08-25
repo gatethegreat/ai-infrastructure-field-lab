@@ -1,0 +1,8 @@
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"incident_id": "inc-synthetic-001"}, "event_type": "incident_validated", "sequence": 1}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"runbook_id": "runbook-checkout-503-v1"}, "event_type": "runbook_retrieved", "sequence": 2}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"error_rate_percent": 12.5, "service": "checkout-api", "source": "synthetic-monitor-v1", "status": "degraded"}, "event_type": "inspection_completed", "sequence": 3}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"action": "restart_replica", "incident_id": "inc-synthetic-001", "parameters": {"reason": "elevated_503_rate"}, "proposal_id": "prop_02c7d7e0bd59bee0", "rationale": "synthetic-monitor-v1 reports 12.5% errors; runbook threshold is 5.0%.", "target": "checkout-api/replica-2"}, "event_type": "proposal_created", "sequence": 4}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"proposal_fingerprint": "proposal_c4573fee8dbe91c8", "proposal_id": "prop_02c7d7e0bd59bee0"}, "event_type": "approval_requested", "sequence": 5}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"decision": "approve"}, "event_type": "approval_decided", "sequence": 6}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"action_id": "action_dfcb253dfa7b4af0", "idempotency_key": "idem_87bc4bda5e15160c", "outcome": "simulated restart_replica on checkout-api/replica-2", "replayed": false, "simulated": true}, "event_type": "action_completed", "sequence": 7}
+{"correlation_id": "corr_38969c91a9ca1258", "data": {"action_executed": true, "status": "completed"}, "event_type": "execution_finished", "sequence": 8}

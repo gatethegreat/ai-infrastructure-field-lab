@@ -1,0 +1,63 @@
+{
+  "estimate_version": "1.0",
+  "pricing_research_date": "<YYYY-MM-DD>",
+  "region": "<APPROVED_REGION>",
+  "currency": "USD",
+  "assumptions": {
+    "normal_scenarios": 12,
+    "measured_repetitions_per_scenario": 10,
+    "warmups_excluded": 1,
+    "expected_gateway_requests": "<CALCULATE_FROM_TRAJECTORIES>",
+    "retention_hours": "<TEST_WINDOW_HOURS>"
+  },
+  "line_items": [
+    {
+      "service": "Amazon Bedrock AgentCore Gateway",
+      "usage_quantity": "<REQUEST_OR_COMPUTE_QUANTITY>",
+      "unit": "<CURRENT_PRICING_UNIT>",
+      "unit_price": "<CURRENT_REGIONAL_PRICE>",
+      "estimated_cost": "<QUANTITY_TIMES_UNIT_PRICE>",
+      "source": "<OFFICIAL_AWS_PRICING_URL>"
+    },
+    {
+      "service": "Amazon Bedrock AgentCore Policy",
+      "usage_quantity": "<AUTHORIZATION_EVALUATIONS>",
+      "unit": "<CURRENT_PRICING_UNIT>",
+      "unit_price": "<CURRENT_REGIONAL_PRICE>",
+      "estimated_cost": "<QUANTITY_TIMES_UNIT_PRICE>",
+      "source": "<OFFICIAL_AWS_PRICING_URL>"
+    },
+    {
+      "service": "AWS Lambda",
+      "usage_quantity": "<REQUESTS_AND_GB_SECONDS>",
+      "unit": "requests plus GB-seconds",
+      "unit_price": "<CURRENT_REGIONAL_PRICE_OR_FREE_TIER_ASSUMPTION>",
+      "estimated_cost": "<CALCULATED_COST>",
+      "source": "https://aws.amazon.com/lambda/pricing/"
+    },
+    {
+      "service": "Amazon DynamoDB on-demand",
+      "usage_quantity": "<READ_AND_WRITE_REQUEST_UNITS>",
+      "unit": "request units",
+      "unit_price": "<CURRENT_REGIONAL_PRICE_OR_FREE_TIER_ASSUMPTION>",
+      "estimated_cost": "<CALCULATED_COST>",
+      "source": "https://aws.amazon.com/dynamodb/pricing/on-demand/"
+    },
+    {
+      "service": "Amazon CloudWatch",
+      "usage_quantity": "<LOG_INGESTION_STORAGE_AND_TRACES>",
+      "unit": "<CURRENT_PRICING_UNIT>",
+      "unit_price": "<CURRENT_REGIONAL_PRICE_OR_FREE_TIER_ASSUMPTION>",
+      "estimated_cost": "<CALCULATED_COST>",
+      "source": "https://aws.amazon.com/cloudwatch/pricing/"
+    }
+  ],
+  "estimated_total": "<SUM_LINE_ITEMS>",
+  "excluded_costs": [
+    "Developer time",
+    "Unapproved model calls",
+    "Resources outside this CloudFormation stack",
+    "Taxes and data-transfer surprises"
+  ],
+  "notes": "Replace every placeholder from current official regional pricing before cloud approval. Do not claim a zero cost merely because free tiers may apply."
+}

@@ -1,0 +1,49 @@
+{
+  "base_url": "https://openenv-echo-env.hf.space",
+  "echo_client_version": "0.1.0",
+  "evidence_version": "1.0",
+  "openenv_version": "0.4.1",
+  "recorded_at": "2026-08-21T12:33:11.919967+00:00",
+  "reset_result": {
+    "done": false,
+    "metadata": null,
+    "observation": {
+      "done": false,
+      "metadata": {},
+      "reward": 0.0
+    },
+    "reward": 0.0
+  },
+  "step_result": {
+    "done": false,
+    "metadata": null,
+    "observation": {
+      "done": false,
+      "error": null,
+      "metadata": {},
+      "result": {
+        "content": [
+          {
+            "annotations": null,
+            "meta": null,
+            "text": "Hello, World!",
+            "type": "text"
+          }
+        ],
+        "data": "Hello, World!",
+        "is_error": false,
+        "meta": {
+          "fastmcp": {
+            "wrap_result": true
+          }
+        },
+        "structured_content": {
+          "result": "Hello, World!"
+        }
+      },
+      "reward": null,
+      "tool_name": "echo_message"
+    },
+    "reward": null
+  }
+}

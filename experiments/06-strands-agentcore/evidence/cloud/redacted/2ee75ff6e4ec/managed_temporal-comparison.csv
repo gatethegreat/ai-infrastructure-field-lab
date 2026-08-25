@@ -1,0 +1,12 @@
+scenario_id,expected_result,actual_results,repetitions,expectation_mismatches,false_allows,false_denials,median_tool_calls_completed,median_retries_attempted,median_request_latency_ms,min_request_latency_ms,max_request_latency_ms
+S01,allow,allow,10,0,0,0,3.0,0.0,439.6646,335.2231,775.9881
+S02,deny,deny,10,0,0,0,0.0,0.0,348.08375,299.807,413.9171
+S03,deny,deny,10,0,0,0,1.0,0.0,367.1664,299.1283,527.4995
+S04,deny,deny,10,0,0,0,2.0,0.0,371.83445,289.368,597.632
+S05,deny,deny,10,0,0,0,2.0,0.0,390.0944,282.8698,520.861
+S06,deny,deny,10,0,0,0,3.0,0.0,397.2886,287.6537,611.2623
+S07,deny,deny,10,0,0,0,11.0,0.0,410.0108,310.5685,1401.991
+S08,mixed,tool_error,10,10,10,0,2.0,3.0,423.4174,312.9101,889.3541
+S09,mixed,mixed,10,0,0,0,12.0,0.0,401.73515,324.3434,988.6804
+S10,mixed,mixed,10,0,0,0,5.0,0.0,394.77925,287.5981,640.7609
+S11,validation_error,validation_error,10,0,0,0,0.0,0.0,190.29160000000002,135.5537,293.0987

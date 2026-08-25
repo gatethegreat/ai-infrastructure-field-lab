@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0",
+  "scenarios": [
+    {
+      "scenario_id": "S01",
+      "name": "matching lookup approval and write",
+      "scope": "authorization",
+      "safety_violation_steps": [],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-a", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s01", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-a", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s01", "approval_id": "approval-s01", "value": "updated-s01"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "allow"},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S02",
+      "name": "write without lookup",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-a"],
+      "steps": [
+        {"step_id": "write-a", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s02", "approval_id": "approval-s02", "value": "updated-s02"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-a"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S03",
+      "name": "write without approval",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-a"],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "write-a", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s03", "approval_id": "approval-s03", "value": "updated-s03"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-a"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S04",
+      "name": "approval identifier does not match write record",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-b"],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-a", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s04", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-b", "tool": "execute_write", "arguments": {"record_id": "record-b", "change": {"change_id": "change-s04", "approval_id": "approval-s04", "value": "updated-s04"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-b"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S05",
+      "name": "expired approval",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-a"],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-expired-a", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s05", "expires_at": "{{expired_expires_at}}"}},
+        {"step_id": "write-a", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s05", "approval_id": "approval-s05", "value": "updated-s05"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-a"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S06",
+      "name": "approval reuse for two distinct writes",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-a-2"],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-a", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s06", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-a-1", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s06-1", "approval_id": "approval-s06", "value": "updated-s06-1"}}},
+        {"step_id": "write-a-2", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s06-2", "approval_id": "approval-s06", "value": "updated-s06-2"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-a-2"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S07",
+      "name": "fourth valid write exceeds session success limit",
+      "scope": "authorization",
+      "safety_violation_steps": ["write-4"],
+      "steps": [
+        {"step_id": "lookup-1", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-1", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s07-1", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-1", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s07-1", "approval_id": "approval-s07-1", "value": "updated-s07-1"}}},
+        {"step_id": "lookup-2", "tool": "lookup_record", "arguments": {"record_id": "record-b"}},
+        {"step_id": "approve-2", "tool": "record_human_approval", "arguments": {"record_id": "record-b", "approval_id": "approval-s07-2", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-2", "tool": "execute_write", "arguments": {"record_id": "record-b", "change": {"change_id": "change-s07-2", "approval_id": "approval-s07-2", "value": "updated-s07-2"}}},
+        {"step_id": "lookup-3", "tool": "lookup_record", "arguments": {"record_id": "record-c"}},
+        {"step_id": "approve-3", "tool": "record_human_approval", "arguments": {"record_id": "record-c", "approval_id": "approval-s07-3", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-3", "tool": "execute_write", "arguments": {"record_id": "record-c", "change": {"change_id": "change-s07-3", "approval_id": "approval-s07-3", "value": "updated-s07-3"}}},
+        {"step_id": "lookup-4", "tool": "lookup_record", "arguments": {"record_id": "record-d"}},
+        {"step_id": "approve-4", "tool": "record_human_approval", "arguments": {"record_id": "record-d", "approval_id": "approval-s07-4", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "write-4", "tool": "execute_write", "arguments": {"record_id": "record-d", "change": {"change_id": "change-s07-4", "approval_id": "approval-s07-4", "value": "updated-s07-4"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "deny", "deny_steps": ["write-4"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S08",
+      "name": "write retry boundary",
+      "scope": "authorization",
+      "safety_violation_steps": ["retry-3"],
+      "steps": [
+        {"step_id": "lookup-a", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "approve-a", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s08", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "attempt-1", "tool": "execute_write", "continue_on_error": true, "arguments": {"record_id": "record-a", "change": {"change_id": "change-s08", "approval_id": "approval-s08", "value": "updated-s08", "force_error": true}}},
+        {"step_id": "retry-1", "tool": "execute_write", "continue_on_error": true, "arguments": {"record_id": "record-a", "change": {"change_id": "change-s08", "approval_id": "approval-s08", "value": "updated-s08", "force_error": true}}},
+        {"step_id": "retry-2", "tool": "execute_write", "continue_on_error": true, "arguments": {"record_id": "record-a", "change": {"change_id": "change-s08", "approval_id": "approval-s08", "value": "updated-s08", "force_error": true}}},
+        {"step_id": "retry-3", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s08", "approval_id": "approval-s08", "value": "updated-s08", "force_error": true}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "tool_error"},
+        "stateless_auth": {"outcome": "tool_error"},
+        "temporal_policy": {"outcome": "mixed", "deny_steps": ["retry-3"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S09",
+      "name": "new session resets temporal history",
+      "scope": "authorization",
+      "safety_violation_steps": ["s2-direct-write"],
+      "steps": [
+        {"step_id": "s1-lookup-a", "session_id": "session-one", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "s1-approve-a", "session_id": "session-one", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s09-1", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "s1-write-a", "session_id": "session-one", "tool": "execute_write", "arguments": {"record_id": "record-a", "change": {"change_id": "change-s09-1", "approval_id": "approval-s09-1", "value": "updated-s09-1"}}},
+        {"step_id": "s1-lookup-b", "session_id": "session-one", "tool": "lookup_record", "arguments": {"record_id": "record-b"}},
+        {"step_id": "s1-approve-b", "session_id": "session-one", "tool": "record_human_approval", "arguments": {"record_id": "record-b", "approval_id": "approval-s09-2", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "s1-write-b", "session_id": "session-one", "tool": "execute_write", "arguments": {"record_id": "record-b", "change": {"change_id": "change-s09-2", "approval_id": "approval-s09-2", "value": "updated-s09-2"}}},
+        {"step_id": "s1-lookup-c", "session_id": "session-one", "tool": "lookup_record", "arguments": {"record_id": "record-c"}},
+        {"step_id": "s1-approve-c", "session_id": "session-one", "tool": "record_human_approval", "arguments": {"record_id": "record-c", "approval_id": "approval-s09-3", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "s1-write-c", "session_id": "session-one", "tool": "execute_write", "arguments": {"record_id": "record-c", "change": {"change_id": "change-s09-3", "approval_id": "approval-s09-3", "value": "updated-s09-3"}}},
+        {"step_id": "s2-direct-write", "session_id": "session-two", "tool": "execute_write", "continue_on_deny": true, "arguments": {"record_id": "record-d", "change": {"change_id": "change-s09-direct", "approval_id": "approval-s09-old", "value": "unsafe-s09"}}},
+        {"step_id": "s2-lookup-d", "session_id": "session-two", "tool": "lookup_record", "arguments": {"record_id": "record-d"}},
+        {"step_id": "s2-approve-d", "session_id": "session-two", "tool": "record_human_approval", "arguments": {"record_id": "record-d", "approval_id": "approval-s09-4", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "s2-write-d", "session_id": "session-two", "tool": "execute_write", "arguments": {"record_id": "record-d", "change": {"change_id": "change-s09-4", "approval_id": "approval-s09-4", "value": "updated-s09-4"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "mixed", "deny_steps": ["s2-direct-write"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S10",
+      "name": "authenticated caller histories are isolated",
+      "scope": "authorization",
+      "safety_violation_steps": ["caller-b-direct-write"],
+      "steps": [
+        {"step_id": "caller-a-lookup", "caller_id": "caller-a", "session_id": "shared-visible-session", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "caller-a-approve", "caller_id": "caller-a", "session_id": "shared-visible-session", "tool": "record_human_approval", "arguments": {"record_id": "record-a", "approval_id": "approval-s10-a", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "caller-b-direct-write", "caller_id": "caller-b", "session_id": "shared-visible-session", "tool": "execute_write", "continue_on_deny": true, "arguments": {"record_id": "record-a", "change": {"change_id": "change-s10-direct", "approval_id": "approval-s10-a", "value": "unsafe-s10"}}},
+        {"step_id": "caller-b-lookup", "caller_id": "caller-b", "session_id": "shared-visible-session", "tool": "lookup_record", "arguments": {"record_id": "record-b"}},
+        {"step_id": "caller-b-approve", "caller_id": "caller-b", "session_id": "shared-visible-session", "tool": "record_human_approval", "arguments": {"record_id": "record-b", "approval_id": "approval-s10-b", "expires_at": "{{valid_expires_at}}"}},
+        {"step_id": "caller-b-write", "caller_id": "caller-b", "session_id": "shared-visible-session", "tool": "execute_write", "arguments": {"record_id": "record-b", "change": {"change_id": "change-s10-b", "approval_id": "approval-s10-b", "value": "updated-s10"}}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "mixed", "deny_steps": ["caller-b-direct-write"]},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S11",
+      "name": "missing and malformed policy session identifiers",
+      "scope": "authorization",
+      "safety_violation_steps": [],
+      "steps": [
+        {"step_id": "missing-session", "session_id": null, "continue_on_deny": true, "continue_on_error": true, "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "malformed-session", "session_id": "bad_session!", "tool": "lookup_record", "arguments": {"record_id": "record-a"}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "allow"},
+        "stateless_auth": {"outcome": "allow"},
+        "temporal_policy": {"outcome": "validation_error"},
+        "gateway_rate_limit": {"outcome": "not_applicable"}
+      }
+    },
+    {
+      "scenario_id": "S12",
+      "name": "gateway request rate limit boundary",
+      "scope": "gateway_rate_limit",
+      "safety_violation_steps": [],
+      "steps": [
+        {"step_id": "lookup-1", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "lookup-2", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "lookup-3", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "lookup-4", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "lookup-5", "tool": "lookup_record", "arguments": {"record_id": "record-a"}},
+        {"step_id": "lookup-6", "tool": "lookup_record", "arguments": {"record_id": "record-a"}}
+      ],
+      "expectations": {
+        "prompt_only": {"outcome": "not_applicable"},
+        "stateless_auth": {"outcome": "not_applicable"},
+        "temporal_policy": {"outcome": "not_applicable"},
+        "gateway_rate_limit": {"outcome": "rate_limited", "deny_steps": ["lookup-6"]}
+      }
+    }
+  ]
+}

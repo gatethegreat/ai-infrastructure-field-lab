@@ -1,0 +1,9 @@
+{
+  "before_restart_resume_status": "RUNNING",
+  "decision": "approve",
+  "experiment": "03-dapr-agents",
+  "final_status": "COMPLETED",
+  "instance_id": "recovery-20260821-02",
+  "probe": "dapr-workflow-crash-restart",
+  "serialized_output": "{\"status\": \"completed\", \"inspection\": {\"inspection\": {\"service\": \"checkout-api\", \"status\": \"degraded\", \"error_rate_percent\": 12.5, \"source\": \"synthetic-monitor-v1\"}, \"permitted_remediation\": {\"runbook_id\": \"runbook-checkout-503-v1\", \"threshold_percent\": 5.0, \"action\": \"restart_replica\", \"target\": \"checkout-api/replica-2\", \"parameters\": {\"reason\": \"elevated_503_rate\"}}}, \"action_result\": {\"action_id\": \"dapr-inc-synthetic-001\", \"idempotency_key\": \"delivery-synthetic-001\", \"outcome\": \"simulated restart_replica on checkout-api/replica-2\", \"simulated\": true, \"replayed\": false}}"
+}

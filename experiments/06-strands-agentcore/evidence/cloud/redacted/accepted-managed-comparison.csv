@@ -1,0 +1,14 @@
+source_batch,layer,scenario_id,configuration,repetitions,expected_result,actual_result,expectation_mismatches,false_allows,false_denials,median_request_latency_ms,min_request_latency_ms,max_request_latency_ms,evidence_status
+2ee75ff6e4ec,agentcore_temporal,S01,paced_1s,10,allow,allow,0,0,0,439.6646,335.2231,775.9881,accepted
+2ee75ff6e4ec,agentcore_temporal,S02,paced_1s,10,deny,deny,0,0,0,348.08375,299.807,413.9171,accepted
+2ee75ff6e4ec,agentcore_temporal,S03,paced_1s,10,deny,deny,0,0,0,367.1664,299.1283,527.4995,accepted
+2ee75ff6e4ec,agentcore_temporal,S04,paced_1s,10,deny,deny,0,0,0,371.83445,289.368,597.632,accepted
+2ee75ff6e4ec,agentcore_temporal,S05,paced_1s,10,deny,deny,0,0,0,390.0944,282.8698,520.861,accepted
+2ee75ff6e4ec,agentcore_temporal,S06,paced_1s,10,deny,deny,0,0,0,397.2886,287.6537,611.2623,accepted
+2ee75ff6e4ec,agentcore_temporal,S07,paced_1s,10,deny,deny,0,0,0,410.0108,310.5685,1401.991,accepted
+8d21c017f03f,agentcore_temporal,S08,paced_1s_approval_key_retry,10,mixed,mixed,0,0,0,400.59605,297.447,894.8952,accepted
+2ee75ff6e4ec,agentcore_temporal,S09,paced_1s,10,mixed,mixed,0,0,0,401.73515,324.3434,988.6804,accepted
+2ee75ff6e4ec,agentcore_temporal,S10,paced_1s,10,mixed,mixed,0,0,0,394.77925,287.5981,640.7609,accepted
+2ee75ff6e4ec,agentcore_temporal,S11,paced_1s,10,validation_error,validation_error,0,0,0,190.2916,135.5537,293.0987,accepted
+dc0d1e456314,gateway_rate_limit,S12,toolName_plus_iam_principal_5_per_second,1,rate_limited,allow,1,0,0,722.15345,646.1946,1251.0756,observed_non_enforcement
+e9a8a5293522,gateway_rate_limit,S12,toolName_only_5_per_second_stale_policy_session_on_request_6,1,rate_limited,inconclusive,1,0,0,843.4305,611.7098,1112.9555,inconclusive_policy_session_contamination

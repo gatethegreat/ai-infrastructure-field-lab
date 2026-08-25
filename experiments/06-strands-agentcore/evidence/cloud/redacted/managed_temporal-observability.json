@@ -1,0 +1,82 @@
+{
+  "errors": [
+    "aws/spans query: AWS CLI command failed (logs): aws: [ERROR]: An error occurred (ResourceNotFoundException) when calling the FilterLogEvents operation: The specified log group does not exist."
+  ],
+  "metric_queries": [
+    {
+      "Datapoints": [
+        {
+          "Average": 32.258278145695364,
+          "Maximum": 49.0,
+          "Minimum": 29.0,
+          "SampleCount": 151.0,
+          "Timestamp": "2000-01-01T00:15:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 33.28378378378378,
+          "Maximum": 88.0,
+          "Minimum": 28.0,
+          "SampleCount": 74.0,
+          "Timestamp": "2000-01-01T00:14:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 32.175324675324674,
+          "Maximum": 41.0,
+          "Minimum": 27.0,
+          "SampleCount": 154.0,
+          "Timestamp": "2000-01-01T00:17:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 35.306666666666665,
+          "Maximum": 97.0,
+          "Minimum": 28.0,
+          "SampleCount": 150.0,
+          "Timestamp": "2000-01-01T00:16:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    },
+    {
+      "Datapoints": [
+        {
+          "Average": 32.258278145695364,
+          "Maximum": 49.0,
+          "Minimum": 29.0,
+          "SampleCount": 151.0,
+          "Timestamp": "2000-01-01T00:15:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 33.28378378378378,
+          "Maximum": 88.0,
+          "Minimum": 28.0,
+          "SampleCount": 74.0,
+          "Timestamp": "2000-01-01T00:14:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 32.175324675324674,
+          "Maximum": 41.0,
+          "Minimum": 27.0,
+          "SampleCount": 154.0,
+          "Timestamp": "2000-01-01T00:17:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 35.306666666666665,
+          "Maximum": 97.0,
+          "Minimum": 28.0,
+          "SampleCount": 150.0,
+          "Timestamp": "2000-01-01T00:16:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    }
+  ],
+  "spans": null
+}

@@ -1,0 +1,9 @@
+{
+  "engine_id": "AgentCorePolicyLab_Engine-uci6xmlp5i",
+  "engine_mode": "ENFORCE",
+  "gateway_id": "gateway-000001",
+  "gateway_url": "https://gateway-000001.example.invalid/mcp",
+  "policy_mode": "ACTIVE",
+  "primary_role_arn": "<REDACTED_SESSION>",
+  "secondary_role_arn": "<REDACTED_SESSION>"
+}

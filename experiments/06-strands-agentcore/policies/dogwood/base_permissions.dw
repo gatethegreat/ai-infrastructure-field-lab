@@ -1,0 +1,19 @@
+@id("allow_lookup")
+permit (
+    principal,
+    action == Drupe::Action::"lookup_record",
+    resource
+);
+@id("allow_record_approval")
+permit (
+    principal,
+    action == Drupe::Action::"record_human_approval",
+    resource
+);
+
+@id("allow_operation_status")
+permit (
+    principal,
+    action == Drupe::Action::"get_operation_status",
+    resource
+);

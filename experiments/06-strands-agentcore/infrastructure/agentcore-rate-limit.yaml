@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Separate synthetic AgentCore Gateway rate-limit condition. This stack is
+  intentionally independent from authorization and temporal-policy resources.
+
+Parameters:
+  GatewayIdentifier:
+    Type: String
+    AllowedPattern: '^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$'
+    Description: Identifier output by the separately deployed policy-lab stack.
+  RequestsPerSecond:
+    Type: Number
+    Default: 5
+    MinValue: 1
+    MaxValue: 100
+
+Resources:
+  SyntheticPerToolLimit:
+    Type: AWS::BedrockAgentCore::GatewayRateLimit
+    Properties:
+      GatewayIdentifier: !Ref GatewayIdentifier
+      RateLimitId: synthetic-tool-limit
+      Description: >-
+        Synthetic per-tool request limit. This is a fail-open transport
+        condition, not an authorization control.
+      DimensionKeys:
+        - toolName
+      Entries:
+        - Dimensions:
+            toolName: '*'
+          Requests:
+            - Rate: !Ref RequestsPerSecond
+              Period: second
+
+Outputs:
+  RateLimitId:
+    Value: synthetic-tool-limit
+  GatewayIdentifier:
+    Value: !Ref GatewayIdentifier

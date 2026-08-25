@@ -1,0 +1,2 @@
+scenario_id,expected_result,actual_results,repetitions,expectation_mismatches,false_allows,false_denials,median_tool_calls_completed,median_retries_attempted,median_request_latency_ms,min_request_latency_ms,max_request_latency_ms
+S12,rate_limited,inconclusive,1,1,0,0,5,0,843.4305,611.7098,1112.9555

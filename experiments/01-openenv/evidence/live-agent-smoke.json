@@ -1,0 +1,39 @@
+{
+  "approval": {
+    "proposal_fingerprint": "proposal_51ab61861006caae",
+    "proposal_id": "prop_02c7d7e0bd59bee0",
+    "required_before_execution": true
+  },
+  "authoritative_effect_count": 0,
+  "estimated_model_cost_usd": 0.0002704,
+  "evidence_version": "1.0",
+  "model": "gpt-5.6-luna",
+  "proposal": {
+    "action": "restart_replica",
+    "incident_id": "inc-synthetic-001",
+    "parameters": {
+      "reason": "elevated_503_rate"
+    },
+    "proposal_id": "prop_02c7d7e0bd59bee0",
+    "rationale": "Read-only inspection shows checkout-api is degraded with a 12.5% error rate, exceeding the 5.0% threshold. The permitted remediation is to restart replica-2 under runbook-checkout-503-v1. Approval is required before execution.",
+    "target": "checkout-api/replica-2"
+  },
+  "provider": "openai",
+  "recorded_at": "2026-08-21T12:13:32.467724+00:00",
+  "response_ids": [
+    "resp_0c3751642dc25132016a8840e72c6887d19d5a935dc280b668",
+    "resp_0c3751642dc25132016a8840e8bd0487d193084f13a1904f83"
+  ],
+  "tool_call": {
+    "arguments": {
+      "service": "checkout-api"
+    },
+    "call_id": "call_DkhE0IOKvG5N4ijYRjeQQWVO",
+    "name": "inspect_incident_context"
+  },
+  "usage": {
+    "input_tokens": 656,
+    "output_tokens": 116,
+    "total_tokens": 772
+  }
+}

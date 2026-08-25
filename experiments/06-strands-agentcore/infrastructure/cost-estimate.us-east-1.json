@@ -1,0 +1,58 @@
+{
+  "estimate_version": "1.0",
+  "pricing_research_date": "2026-08-24",
+  "region": "us-east-1",
+  "currency": "USD",
+  "status": "reproduction planning estimate; the bounded cloud run completed and was torn down, but billed cost was not queried",
+  "assumptions": {
+    "authorization_scenarios": 11,
+    "separate_transport_scenarios": 1,
+    "measured_repetitions_per_scenario": 10,
+    "warmups_excluded": 1,
+    "maximum_gateway_requests": 1500,
+    "maximum_authorization_requests": 1500,
+    "retention_hours": 4,
+    "note": "The request counts are conservative ceilings that include setup checks, warmups, retries, and separate rate-limit probes."
+  },
+  "line_items": [
+    {
+      "service": "Amazon Bedrock AgentCore Gateway",
+      "usage_quantity": 1500,
+      "unit": "API invocations",
+      "unit_price": 0.005,
+      "price_unit": "per 1000 invocations",
+      "estimated_cost": 0.0075,
+      "source": "https://aws.amazon.com/bedrock/agentcore/pricing/"
+    },
+    {
+      "service": "Amazon Bedrock AgentCore Policy",
+      "usage_quantity": 1500,
+      "unit": "authorization requests",
+      "unit_price": 0.000025,
+      "price_unit": "per request",
+      "estimated_cost": 0.0375,
+      "source": "https://aws.amazon.com/bedrock/agentcore/pricing/"
+    },
+    {
+      "service": "AWS Lambda, DynamoDB on-demand, and CloudWatch",
+      "usage_quantity": "small synthetic test workload retained for no more than four hours",
+      "unit": "variable",
+      "unit_price": "current us-east-1 rates",
+      "estimated_cost": "not asserted as zero; covered by the safety ceiling",
+      "sources": [
+        "https://aws.amazon.com/lambda/pricing/",
+        "https://aws.amazon.com/dynamodb/pricing/on-demand/",
+        "https://aws.amazon.com/cloudwatch/pricing/"
+      ]
+    }
+  ],
+  "direct_agentcore_estimate": 0.045,
+  "requested_safety_ceiling": 5.0,
+  "excluded_costs": [
+    "Developer time",
+    "Model calls, which this experiment does not require",
+    "Resources outside the two CloudFormation stacks",
+    "Taxes and unexpected data transfer"
+  ],
+  "notes": "Re-check official pricing immediately before deployment. Stop before the ceiling rather than treating it as a spending target. Delete the rate-limit stack first and the main stack second after evidence capture."
+}

@@ -1,0 +1,50 @@
+{
+  "research_date": "2026-08-21",
+  "runtime": {
+    "node": "24.19.0",
+    "npm": "11.17.0"
+  },
+  "packages": {
+    "ai": "7.0.73",
+    "@ai-sdk/workflow": "2.0.3",
+    "@ai-sdk/openai": "4.0.45",
+    "workflow": "5.0.0-beta.43",
+    "nitro": "3.0.260610-beta",
+    "vite": "8.2.2",
+    "zod": "4.4.3"
+  },
+  "installation": {
+    "resolved_packages": 502,
+    "elapsed_seconds": 50,
+    "node_modules_bytes": 270161105,
+    "node_modules_files": 27530,
+    "production_audit_high": 14,
+    "production_audit_critical": 0,
+    "audit_root_cause": "The required Workflow 5 beta dependency tree includes nanoid below 5.1.16; npm's suggested fix is an incompatible major downgrade."
+  },
+  "build": {
+    "typescript": "passed with Bundler module resolution and dependency declaration checks skipped",
+    "workflow_compile": "passed",
+    "workflow_count": 1,
+    "compiled_step_count": 19,
+    "vite_nitro_build": "passed"
+  },
+  "local_run": {
+    "run_id": "wrun_01M0JENNZ2KE5A3NM2VEZZ189C",
+    "status": "completed",
+    "workflow_name": "handleUserSignup",
+    "recorded_step_count": 3,
+    "output_status": "onboarded",
+    "persisted_after_server_stop": true,
+    "storage": ".workflow-data local file backend"
+  },
+  "reverified": {
+    "date": "2026-08-25",
+    "build": "passed",
+    "persisted_run_inspection": "completed run remained visible",
+    "production_audit_high": 14,
+    "production_audit_critical": 0
+  },
+  "external_resources_created": false,
+  "paid_model_calls": 0
+}

@@ -1,0 +1,699 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Synthetic AgentCore Gateway and temporal-policy test boundary. Creates no
+  production integrations and contains no account identifiers or secrets.
+
+Parameters:
+  LabName:
+    Type: String
+    Default: AgentCorePolicyLab
+    AllowedPattern: '^[A-Za-z][A-Za-z0-9]{0,27}$'
+    Description: Prefix for synthetic resources.
+  CallerPrincipalArn:
+    Type: String
+    AllowedPattern: '^arn:aws(-[a-z0-9-]+)?:iam::[0-9]{12}:(role|user)/.+$'
+    Description: Existing operator principal allowed to assume the two test roles.
+  PolicyEngineMode:
+    Type: String
+    Default: LOG_ONLY
+    AllowedValues: [LOG_ONLY, ENFORCE]
+  PolicyEnforcementMode:
+    Type: String
+    Default: LOG_ONLY
+    AllowedValues: [LOG_ONLY, ACTIVE]
+  SessionWriteLimit:
+    Type: Number
+    Default: 3
+    MinValue: 1
+    MaxValue: 20
+  RetryLimit:
+    Type: Number
+    Default: 3
+    MinValue: 1
+    MaxValue: 10
+
+Resources:
+  OperationTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+      Tags:
+        - Key: field-lab
+          Value: synthetic-agentcore-policy
+
+  SyntheticToolRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: SyntheticOperationState
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                Resource: !GetAtt OperationTable.Arn
+
+  SyntheticToolsFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub ${LabName}-SyntheticTools
+      Runtime: python3.12
+      Handler: index.lambda_handler
+      Role: !GetAtt SyntheticToolRole.Arn
+      Timeout: 10
+      MemorySize: 128
+      ReservedConcurrentExecutions: 2
+      Environment:
+        Variables:
+          OPERATION_TABLE: !Ref OperationTable
+      Code:
+        ZipFile: |
+          import datetime
+          import hashlib
+          import json
+          import os
+
+          import boto3
+
+          TABLE = boto3.resource("dynamodb").Table(os.environ["OPERATION_TABLE"])
+          RECORDS = {
+              "record-a": {"record_id": "record-a", "value": "synthetic-a"},
+              "record-b": {"record_id": "record-b", "value": "synthetic-b"},
+              "record-c": {"record_id": "record-c", "value": "synthetic-c"},
+              "record-d": {"record_id": "record-d", "value": "synthetic-d"},
+          }
+
+          def _tool_name(context):
+              custom = (getattr(context, "client_context", None) and
+                        context.client_context.custom) or {}
+              qualified = custom.get("bedrockAgentCoreToolName", "")
+              return qualified.split("___", 1)[-1]
+
+          def _parse_time(value):
+              return datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+          def lambda_handler(event, context):
+              tool = _tool_name(context)
+              if tool == "lookup_record":
+                  record_id = event["record_id"]
+                  if record_id not in RECORDS:
+                      raise KeyError("synthetic record not found")
+                  return RECORDS[record_id]
+
+              if tool == "record_human_approval":
+                  expires_at = event["expires_at"]
+                  valid = _parse_time(expires_at) > datetime.datetime.now(datetime.timezone.utc)
+                  item = {
+                      "pk": f"APPROVAL#{event['approval_id']}",
+                      "sk": event["record_id"],
+                      "expires_at": expires_at,
+                      "valid": valid,
+                  }
+                  TABLE.put_item(Item=item)
+                  return {**event, "valid": valid}
+
+              if tool == "execute_write":
+                  change = event["change"]
+                  canonical = json.dumps(event, sort_keys=True, separators=(",", ":"))
+                  operation_id = "op-" + hashlib.sha256(canonical.encode()).hexdigest()[:16]
+                  status = "FAILED" if change.get("force_error", False) else "SUCCEEDED"
+                  operation = {
+                      "pk": f"OPERATION#{operation_id}",
+                      "sk": "STATUS",
+                      "record_id": event["record_id"],
+                      "change_id": change["change_id"],
+                      "approval_id": change["approval_id"],
+                      "status": status,
+                  }
+                  if status == "SUCCEEDED":
+                      operation["value"] = change["value"]
+                  TABLE.put_item(Item=operation)
+                  return {
+                      "operation_id": operation_id,
+                      "record_id": event["record_id"],
+                      "change_id": change["change_id"],
+                      "approval_id": change["approval_id"],
+                      "status": status,
+                  }
+
+              if tool == "get_operation_status":
+                  operation_id = event["operation_id"]
+                  result = TABLE.get_item(
+                      Key={"pk": f"OPERATION#{operation_id}", "sk": "STATUS"}
+                  ).get("Item")
+                  if not result:
+                      raise KeyError("synthetic operation not found")
+                  return {
+                      "operation_id": operation_id,
+                      "record_id": result["record_id"],
+                      "change_id": result["change_id"],
+                      "status": result["status"],
+                  }
+
+              raise ValueError("unknown synthetic tool")
+
+  SyntheticToolsLogGroup:
+    Type: AWS::Logs::LogGroup
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${SyntheticToolsFunction}
+      RetentionInDays: 7
+
+  PolicyEngine:
+    Type: AWS::BedrockAgentCore::PolicyEngine
+    Properties:
+      Name: !Sub ${LabName}_Engine
+      Description: Synthetic temporal authorization test engine.
+      Tags:
+        - Key: field-lab
+          Value: synthetic-agentcore-policy
+
+  GatewayExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock-agentcore.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeSyntheticTarget
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: lambda:InvokeFunction
+                Resource: !GetAtt SyntheticToolsFunction.Arn
+        - PolicyName: EvaluateAgentCorePolicies
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock-agentcore:AuthorizeAction
+                  - bedrock-agentcore:PartiallyAuthorizeActions
+                  - bedrock-agentcore:GetPolicyEngine
+                Resource:
+                  - !Sub arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:policy-engine/*
+                  - !Sub arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:gateway/*
+              - Effect: Allow
+                Action: bedrock-agentcore:GetWorkloadAccessToken
+                Resource:
+                  - !Sub arn:${AWS::Partition}:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:workload-identity-directory/default*
+
+  SyntheticGateway:
+    Type: AWS::BedrockAgentCore::Gateway
+    Properties:
+      Name: !Sub ${LabName}-Gateway
+      Description: Synthetic authenticated MCP tools for policy comparison.
+      AuthorizerType: AWS_IAM
+      ProtocolType: MCP
+      ProtocolConfiguration:
+        Mcp:
+          Instructions: Use only synthetic record identifiers and values.
+          SupportedVersions:
+            - '2025-06-18'
+      RoleArn: !GetAtt GatewayExecutionRole.Arn
+      PolicyEngineConfiguration:
+        Arn: !GetAtt PolicyEngine.PolicyEngineArn
+        Mode: !Ref PolicyEngineMode
+      Tags:
+        field-lab: synthetic-agentcore-policy
+
+  SyntheticToolsTarget:
+    Type: AWS::BedrockAgentCore::GatewayTarget
+    Properties:
+      GatewayIdentifier: !GetAtt SyntheticGateway.GatewayIdentifier
+      Name: SyntheticTools
+      Description: Four deterministic synthetic record tools.
+      CredentialProviderConfigurations:
+        - CredentialProviderType: GATEWAY_IAM_ROLE
+      TargetConfiguration:
+        Mcp:
+          Lambda:
+            LambdaArn: !GetAtt SyntheticToolsFunction.Arn
+            ToolSchema:
+              InlinePayload:
+                - Name: lookup_record
+                  Description: Return one synthetic record without changing state.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      record_id: {Type: string}
+                    Required: [record_id]
+                  OutputSchema:
+                    Type: object
+                    Properties:
+                      record_id: {Type: string}
+                      value: {Type: string}
+                    Required: [record_id, value]
+                - Name: record_human_approval
+                  Description: Record a synthetic approval and its expiry.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      record_id: {Type: string}
+                      approval_id: {Type: string}
+                      expires_at: {Type: string}
+                    Required: [record_id, approval_id, expires_at]
+                  OutputSchema:
+                    Type: object
+                    Properties:
+                      record_id: {Type: string}
+                      approval_id: {Type: string}
+                      expires_at: {Type: string}
+                      valid: {Type: boolean}
+                    Required: [record_id, approval_id, expires_at, valid]
+                - Name: execute_write
+                  Description: Apply an idempotent synthetic change.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      record_id: {Type: string}
+                      change:
+                        Type: object
+                        Properties:
+                          change_id: {Type: string}
+                          approval_id: {Type: string}
+                          value: {Type: string}
+                          force_error: {Type: boolean}
+                        Required: [change_id, approval_id, value]
+                    Required: [record_id, change]
+                  OutputSchema:
+                    Type: object
+                    Properties:
+                      operation_id: {Type: string}
+                      record_id: {Type: string}
+                      change_id: {Type: string}
+                      approval_id: {Type: string}
+                      status: {Type: string}
+                    Required: [operation_id, record_id, change_id, approval_id, status]
+                - Name: get_operation_status
+                  Description: Return persisted status for a synthetic operation.
+                  InputSchema:
+                    Type: object
+                    Properties:
+                      operation_id: {Type: string}
+                    Required: [operation_id]
+                  OutputSchema:
+                    Type: object
+                    Properties:
+                      operation_id: {Type: string}
+                      record_id: {Type: string}
+                      change_id: {Type: string}
+                      status: {Type: string}
+                    Required: [operation_id, record_id, change_id, status]
+
+  LookupPrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_LookupPrimary
+      Description: Permit lookup for the primary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___lookup_record",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  LookupSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_LookupSecondary
+      Description: Permit lookup for the secondary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___lookup_record",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  ApprovalPrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_ApprovalPrimary
+      Description: Permit approval recording for the primary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___record_human_approval",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  ApprovalSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_ApprovalSecondary
+      Description: Permit approval recording for the secondary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___record_human_approval",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  StatusPrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_StatusPrimary
+      Description: Permit status lookup for the primary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___get_operation_status",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  StatusSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_StatusSecondary
+      Description: Permit status lookup for the secondary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Cedar:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___get_operation_status",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            );
+
+  TemporalWritePrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_WritePrimary
+      Description: Temporal write permit for the primary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              formerly within 10m AgentCore::Action::"SyntheticTools___lookup_record"::response{
+                eventResource: resource,
+                output.record_id: context.input.record_id
+              }
+              && !AgentCore::Action::"SyntheticTools___execute_write"::response{
+                eventResource: resource,
+                output.approval_id: context.input.change.approval_id,
+                output.status: "SUCCEEDED"
+              }
+              since within 5m AgentCore::Action::"SyntheticTools___record_human_approval"::response{
+                eventResource: resource,
+                input.record_id: context.input.record_id,
+                input.approval_id: context.input.change.approval_id,
+                output.valid: true
+              }
+            };
+
+  TemporalWriteSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn: SyntheticToolsTarget
+    Properties:
+      Name: !Sub ${LabName}_WriteSecondary
+      Description: Temporal write permit for the secondary synthetic caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            permit (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              formerly within 10m AgentCore::Action::"SyntheticTools___lookup_record"::response{
+                eventResource: resource,
+                output.record_id: context.input.record_id
+              }
+              && !AgentCore::Action::"SyntheticTools___execute_write"::response{
+                eventResource: resource,
+                output.approval_id: context.input.change.approval_id,
+                output.status: "SUCCEEDED"
+              }
+              since within 5m AgentCore::Action::"SyntheticTools___record_human_approval"::response{
+                eventResource: resource,
+                input.record_id: context.input.record_id,
+                input.approval_id: context.input.change.approval_id,
+                output.valid: true
+              }
+            };
+
+  SessionWriteLimitPrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn:
+      - SyntheticToolsTarget
+      - TemporalWritePrimaryPolicy
+    Properties:
+      Name: !Sub ${LabName}_SessionCapPrimary
+      Description: Enforce the successful write cap for the primary caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            forbid (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              exists (successfulWrites: Long).
+                (count for (t: Timepoint).
+                  where (formerly within 24h (AgentCore::Action::"SyntheticTools___execute_write"::response{
+                    eventResource: resource,
+                    output.status: "SUCCEEDED"
+                  } && tp(t)))) == successfulWrites
+                && successfulWrites >= ${SessionWriteLimit}
+            };
+
+  SessionWriteLimitSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn:
+      - SyntheticToolsTarget
+      - TemporalWriteSecondaryPolicy
+    Properties:
+      Name: !Sub ${LabName}_SessionCapSecondary
+      Description: Enforce the successful write cap for the secondary caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            forbid (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              exists (successfulWrites: Long).
+                (count for (t: Timepoint).
+                  where (formerly within 24h (AgentCore::Action::"SyntheticTools___execute_write"::response{
+                    eventResource: resource,
+                    output.status: "SUCCEEDED"
+                  } && tp(t)))) == successfulWrites
+                && successfulWrites >= ${SessionWriteLimit}
+            };
+
+  RetryLimitPrimaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn:
+      - SyntheticToolsTarget
+      - TemporalWritePrimaryPolicy
+    Properties:
+      Name: !Sub ${LabName}_RetryCapPrimary
+      Description: Enforce the same-change retry cap for the primary caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            forbid (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${PrimaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              exists (sameChangeResponses: Long).
+                (count for (t: Timepoint).
+                  where (formerly within 1h (AgentCore::Action::"SyntheticTools___execute_write"::response{
+                    eventResource: resource,
+                    output.approval_id: context.input.change.approval_id,
+                    output.status: "FAILED"
+                  } && tp(t)))) == sameChangeResponses
+                && sameChangeResponses >= ${RetryLimit}
+            };
+
+  RetryLimitSecondaryPolicy:
+    Type: AWS::BedrockAgentCore::Policy
+    DependsOn:
+      - SyntheticToolsTarget
+      - TemporalWriteSecondaryPolicy
+    Properties:
+      Name: !Sub ${LabName}_RetryCapSecondary
+      Description: Enforce the same-change retry cap for the secondary caller.
+      PolicyEngineId: !GetAtt PolicyEngine.PolicyEngineId
+      EnforcementMode: !Ref PolicyEnforcementMode
+      ValidationMode: FAIL_ON_ANY_FINDINGS
+      Definition:
+        Policy:
+          Statement: !Sub |
+            forbid (
+              principal == AgentCore::IamEntity::"arn:${AWS::Partition}:sts::${AWS::AccountId}:assumed-role/${SecondaryCallerRole}",
+              action == AgentCore::Action::"SyntheticTools___execute_write",
+              resource == AgentCore::Gateway::"${SyntheticGateway.GatewayArn}"
+            )
+            when temporal {
+              exists (sameChangeResponses: Long).
+                (count for (t: Timepoint).
+                  where (formerly within 1h (AgentCore::Action::"SyntheticTools___execute_write"::response{
+                    eventResource: resource,
+                    output.approval_id: context.input.change.approval_id,
+                    output.status: "FAILED"
+                  } && tp(t)))) == sameChangeResponses
+                && sameChangeResponses >= ${RetryLimit}
+            };
+
+  PrimaryCallerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Ref CallerPrincipalArn
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeSyntheticGateway
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: bedrock-agentcore:InvokeGateway
+                Resource: !GetAtt SyntheticGateway.GatewayArn
+
+  SecondaryCallerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Ref CallerPrincipalArn
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: InvokeSyntheticGateway
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: bedrock-agentcore:InvokeGateway
+                Resource: !GetAtt SyntheticGateway.GatewayArn
+
+Outputs:
+  GatewayArn:
+    Value: !GetAtt SyntheticGateway.GatewayArn
+  GatewayIdentifier:
+    Value: !GetAtt SyntheticGateway.GatewayIdentifier
+  GatewayUrl:
+    Value: !GetAtt SyntheticGateway.GatewayUrl
+  PolicyEngineArn:
+    Value: !GetAtt PolicyEngine.PolicyEngineArn
+  PolicyEngineId:
+    Value: !GetAtt PolicyEngine.PolicyEngineId
+  TargetId:
+    Value: !GetAtt SyntheticToolsTarget.TargetId
+  PrimaryCallerRoleArn:
+    Value: !GetAtt PrimaryCallerRole.Arn
+  SecondaryCallerRoleArn:
+    Value: !GetAtt SecondaryCallerRole.Arn
+  SyntheticToolsFunctionName:
+    Value: !Ref SyntheticToolsFunction
+  SyntheticToolsLogGroupName:
+    Value: !Ref SyntheticToolsLogGroup
+  OperationTableName:
+    Value: !Ref OperationTable
+  SyntheticToolRoleName:
+    Value: !Ref SyntheticToolRole
+  GatewayExecutionRoleName:
+    Value: !Ref GatewayExecutionRole
+  PrimaryCallerRoleName:
+    Value: !Ref PrimaryCallerRole
+  SecondaryCallerRoleName:
+    Value: !Ref SecondaryCallerRole

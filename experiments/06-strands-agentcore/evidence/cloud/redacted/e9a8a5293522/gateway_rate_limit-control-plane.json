@@ -1,0 +1,97 @@
+{
+  "gateway": {
+    "authorizerType": "AWS_IAM",
+    "createdAt": "2000-01-01T00:01:02.698336+00:00",
+    "description": "Synthetic authenticated MCP tools for policy comparison.",
+    "gatewayArn": "<REDACTED_SESSION>",
+    "gatewayId": "gateway-000001",
+    "gatewayUrl": "https://gateway-000001.example.invalid/mcp",
+    "name": "AgentCorePolicyLab-Gateway",
+    "policyEngineConfiguration": {
+      "arn": "<REDACTED_SESSION>",
+      "mode": "ENFORCE"
+    },
+    "protocolConfiguration": {
+      "mcp": {
+        "instructions": "Use only synthetic record identifiers and values.",
+        "supportedVersions": [
+          "2025-06-18"
+        ]
+      }
+    },
+    "protocolType": "MCP",
+    "roleArn": "<REDACTED_SESSION>",
+    "status": "READY",
+    "updatedAt": "2000-01-01T00:03:33.047647+00:00",
+    "workloadIdentityDetails": {
+      "workloadIdentityArn": "<REDACTED_SESSION>"
+    }
+  },
+  "rate_resources": {
+    "StackResources": [
+      {
+        "DriftInformation": {
+          "StackResourceDriftStatus": "NOT_CHECKED"
+        },
+        "LogicalResourceId": "SyntheticPerToolLimit",
+        "PhysicalResourceId": "cloud-resource-000002",
+        "ResourceStatus": "CREATE_COMPLETE",
+        "ResourceType": "AWS::BedrockAgentCore::GatewayRateLimit",
+        "StackId": "<REDACTED_SESSION>",
+        "StackName": "agentcore-policy-field-lab-rate-limit",
+        "Timestamp": "2000-01-01T00:52:29.261842+00:00"
+      }
+    ]
+  },
+  "rate_stack": {
+    "Stacks": [
+      {
+        "ChangeSetId": "<REDACTED_SESSION>",
+        "CreationTime": "2000-01-01T00:48:24.573842+00:00",
+        "DeploymentConfig": {
+          "DisableRollback": false,
+          "Mode": "STANDARD"
+        },
+        "Description": "Separate synthetic AgentCore Gateway rate-limit condition. This stack is intentionally independent from authorization and temporal-policy resources.",
+        "DisableRollback": false,
+        "DriftInformation": {
+          "StackDriftStatus": "NOT_CHECKED"
+        },
+        "EnableTerminationProtection": false,
+        "LastOperations": [
+          {
+            "OperationId": "cloud-operation-000001",
+            "OperationType": "UPDATE_STACK"
+          }
+        ],
+        "LastUpdatedTime": "2000-01-01T00:52:25.315842+00:00",
+        "NotificationARNs": [],
+        "Outputs": [
+          {
+            "OutputKey": "RateLimitId",
+            "OutputValue": "synthetic-tool-limit"
+          },
+          {
+            "OutputKey": "GatewayIdentifier",
+            "OutputValue": "gateway-000001"
+          }
+        ],
+        "Parameters": [
+          {
+            "ParameterKey": "GatewayIdentifier",
+            "ParameterValue": "gateway-000001"
+          },
+          {
+            "ParameterKey": "RequestsPerSecond",
+            "ParameterValue": "5"
+          }
+        ],
+        "RollbackConfiguration": {},
+        "StackId": "<REDACTED_SESSION>",
+        "StackName": "agentcore-policy-field-lab-rate-limit",
+        "StackStatus": "UPDATE_COMPLETE",
+        "Tags": []
+      }
+    ]
+  }
+}

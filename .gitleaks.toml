@@ -1,0 +1,17 @@
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Synthetic idempotency fixtures in recorded local evidence"
+  condition = "AND"
+  regexTarget = "line"
+  paths = [
+    '''(?:^|/)experiments/00-baseline/evidence/happy-path\.jsonl$''',
+    '''(?:^|/)experiments/01-openenv/evidence/incident-trajectory\.json$''',
+  ]
+  regexes = [
+    '''"idempotency_key"\s*:\s*"[a-z0-9]{4}_[a-z0-9]{16}"''',
+  ]

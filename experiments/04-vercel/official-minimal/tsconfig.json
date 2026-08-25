@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2024", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "plugins": [
+      {
+        "name": "workflow"
+      }
+    ],
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2024",
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"]
+}

@@ -1,0 +1,50 @@
+{
+  "errors": [
+    "aws/spans query: AWS CLI command failed (logs): aws: [ERROR]: An error occurred (ResourceNotFoundException) when calling the FilterLogEvents operation: The specified log group does not exist."
+  ],
+  "metric_queries": [
+    {
+      "Datapoints": [
+        {
+          "Average": 47.5625,
+          "Maximum": 505.0,
+          "Minimum": 30.0,
+          "SampleCount": 48.0,
+          "Timestamp": "2000-01-01T00:46:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.9375,
+          "Maximum": 57.0,
+          "Minimum": 30.0,
+          "SampleCount": 16.0,
+          "Timestamp": "2000-01-01T00:45:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    },
+    {
+      "Datapoints": [
+        {
+          "Average": 47.5625,
+          "Maximum": 505.0,
+          "Minimum": 30.0,
+          "SampleCount": 48.0,
+          "Timestamp": "2000-01-01T00:46:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.9375,
+          "Maximum": 57.0,
+          "Minimum": 30.0,
+          "SampleCount": 16.0,
+          "Timestamp": "2000-01-01T00:45:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    }
+  ],
+  "spans": null
+}

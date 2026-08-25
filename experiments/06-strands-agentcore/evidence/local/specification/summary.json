@@ -1,0 +1,227 @@
+{
+  "authorization_latency": {
+    "prompt_only:S01": {
+      "max_ms": 0.0017,
+      "median_ms": 0.0009,
+      "min_ms": 0.0008,
+      "samples": 30
+    },
+    "prompt_only:S02": {
+      "max_ms": 0.0009,
+      "median_ms": 0.0008500000000000001,
+      "min_ms": 0.0008,
+      "samples": 10
+    },
+    "prompt_only:S03": {
+      "max_ms": 0.001,
+      "median_ms": 0.0009,
+      "min_ms": 0.0007,
+      "samples": 20
+    },
+    "prompt_only:S04": {
+      "max_ms": 0.0009,
+      "median_ms": 0.0008,
+      "min_ms": 0.0007,
+      "samples": 30
+    },
+    "prompt_only:S05": {
+      "max_ms": 0.0011,
+      "median_ms": 0.0008,
+      "min_ms": 0.0007,
+      "samples": 30
+    },
+    "prompt_only:S06": {
+      "max_ms": 0.0021,
+      "median_ms": 0.0009,
+      "min_ms": 0.0008,
+      "samples": 40
+    },
+    "prompt_only:S07": {
+      "max_ms": 0.0047,
+      "median_ms": 0.0014,
+      "min_ms": 0.0007,
+      "samples": 120
+    },
+    "prompt_only:S08": {
+      "max_ms": 0.0042,
+      "median_ms": 0.0013,
+      "min_ms": 0.0007,
+      "samples": 60
+    },
+    "prompt_only:S09": {
+      "max_ms": 0.004,
+      "median_ms": 0.001,
+      "min_ms": 0.0007,
+      "samples": 130
+    },
+    "prompt_only:S10": {
+      "max_ms": 0.0024,
+      "median_ms": 0.0009,
+      "min_ms": 0.0007,
+      "samples": 60
+    },
+    "prompt_only:S11": {
+      "max_ms": 0.0015,
+      "median_ms": 0.0009,
+      "min_ms": 0.0008,
+      "samples": 20
+    },
+    "stateless_auth:S01": {
+      "max_ms": 0.0022,
+      "median_ms": 0.0011,
+      "min_ms": 0.001,
+      "samples": 30
+    },
+    "stateless_auth:S02": {
+      "max_ms": 0.0011,
+      "median_ms": 0.001,
+      "min_ms": 0.0009,
+      "samples": 10
+    },
+    "stateless_auth:S03": {
+      "max_ms": 0.0017,
+      "median_ms": 0.001,
+      "min_ms": 0.0009,
+      "samples": 20
+    },
+    "stateless_auth:S04": {
+      "max_ms": 0.0035,
+      "median_ms": 0.0010500000000000002,
+      "min_ms": 0.0008,
+      "samples": 30
+    },
+    "stateless_auth:S05": {
+      "max_ms": 0.0031,
+      "median_ms": 0.001,
+      "min_ms": 0.0008,
+      "samples": 30
+    },
+    "stateless_auth:S06": {
+      "max_ms": 0.0025,
+      "median_ms": 0.001,
+      "min_ms": 0.0008,
+      "samples": 40
+    },
+    "stateless_auth:S07": {
+      "max_ms": 0.0123,
+      "median_ms": 0.0013,
+      "min_ms": 0.0009,
+      "samples": 120
+    },
+    "stateless_auth:S08": {
+      "max_ms": 0.002,
+      "median_ms": 0.0011,
+      "min_ms": 0.0009,
+      "samples": 60
+    },
+    "stateless_auth:S09": {
+      "max_ms": 0.0044,
+      "median_ms": 0.0012,
+      "min_ms": 0.0009,
+      "samples": 130
+    },
+    "stateless_auth:S10": {
+      "max_ms": 0.0047,
+      "median_ms": 0.00115,
+      "min_ms": 0.0009,
+      "samples": 60
+    },
+    "stateless_auth:S11": {
+      "max_ms": 0.0016,
+      "median_ms": 0.0009,
+      "min_ms": 0.0008,
+      "samples": 20
+    },
+    "temporal_policy:S01": {
+      "max_ms": 0.0123,
+      "median_ms": 0.00255,
+      "min_ms": 0.0016,
+      "samples": 30
+    },
+    "temporal_policy:S02": {
+      "max_ms": 0.0041,
+      "median_ms": 0.0033499999999999997,
+      "min_ms": 0.0019,
+      "samples": 10
+    },
+    "temporal_policy:S03": {
+      "max_ms": 0.0035,
+      "median_ms": 0.0023,
+      "min_ms": 0.0014,
+      "samples": 20
+    },
+    "temporal_policy:S04": {
+      "max_ms": 0.0046,
+      "median_ms": 0.00195,
+      "min_ms": 0.0014,
+      "samples": 30
+    },
+    "temporal_policy:S05": {
+      "max_ms": 0.0048,
+      "median_ms": 0.00165,
+      "min_ms": 0.0014,
+      "samples": 30
+    },
+    "temporal_policy:S06": {
+      "max_ms": 0.0472,
+      "median_ms": 0.0046,
+      "min_ms": 0.0015,
+      "samples": 40
+    },
+    "temporal_policy:S07": {
+      "max_ms": 0.0448,
+      "median_ms": 0.0029,
+      "min_ms": 0.0014,
+      "samples": 120
+    },
+    "temporal_policy:S08": {
+      "max_ms": 0.0103,
+      "median_ms": 0.0047,
+      "min_ms": 0.0015,
+      "samples": 60
+    },
+    "temporal_policy:S09": {
+      "max_ms": 0.0151,
+      "median_ms": 0.0021,
+      "min_ms": 0.0015,
+      "samples": 130
+    },
+    "temporal_policy:S10": {
+      "max_ms": 0.0205,
+      "median_ms": 0.00165,
+      "min_ms": 0.0013,
+      "samples": 60
+    },
+    "temporal_policy:S11": {
+      "max_ms": 0.004,
+      "median_ms": 0.0015500000000000002,
+      "min_ms": 0.0011,
+      "samples": 20
+    }
+  },
+  "control_models": [
+    "prompt_only",
+    "stateless_auth",
+    "temporal_policy"
+  ],
+  "events": 1650,
+  "local_temporal_disclaimer": "local temporal specification only; not Dogwood or Amazon Bedrock AgentCore enforcement evidence",
+  "measured_repetitions": 10,
+  "runs": 330,
+  "scenario_ids": [
+    "S01",
+    "S02",
+    "S03",
+    "S04",
+    "S05",
+    "S06",
+    "S07",
+    "S08",
+    "S09",
+    "S10",
+    "S11"
+  ],
+  "schema_version": "1.0",
+  "test_date": "2026-08-24",
+  "warmups_per_model_scenario": 1
+}

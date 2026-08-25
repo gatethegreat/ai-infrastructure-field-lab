@@ -1,0 +1,15 @@
+{
+  "dogwood_cli_version": "1.0.0",
+  "dogwood_commit": "c6237c88099b3f492ecc5fcee42df06a19224b97",
+  "event_schema_sha256": "0b1356a547cc68a47c8249e19743cf988cd386c8c8c02afdd1cd58b4b93cd641",
+  "execution_layer": "local_dogwood_reference_interpreter",
+  "image_id": "sha256:b30a8aba648c6170a68d2820ad7b6c62f88f4983401406f73c199b1dd2092508",
+  "image_tag": "ai-field-lab-dogwood:1.0.0-c6237c8",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "policy_sha256": "274f76ed3c3e457385a25abf07286c590a711d8822760a9548faa1dd869ec2a0",
+  "production_enforcement": false,
+  "python": "3.12.10",
+  "schema_sha256": "541c62105891a47e3003cc736c4e8c77732e578dabc90184b1b7fee19ad81eb1",
+  "schema_version": "1.0",
+  "test_date": "2026-08-24"
+}

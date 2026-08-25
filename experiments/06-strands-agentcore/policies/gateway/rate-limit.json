@@ -1,0 +1,16 @@
+[
+  {
+    "dimensionKeys": ["toolName"],
+    "description": "Synthetic per-tool request limit; transport control only",
+    "entries": [
+      {
+        "dimensions": {
+          "toolName": "*"
+        },
+        "requests": [
+          {"rate": 5, "period": "second"}
+        ]
+      }
+    ]
+  }
+]

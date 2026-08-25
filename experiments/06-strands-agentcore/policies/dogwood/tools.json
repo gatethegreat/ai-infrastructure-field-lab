@@ -1,0 +1,105 @@
+[
+  {
+    "name": "lookup_record",
+    "description": "Look up one synthetic record by identifier.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string" }
+      },
+      "required": ["record_id"],
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string" },
+        "value": { "type": "string" },
+        "found": { "type": "boolean" }
+      },
+      "required": ["record_id", "value", "found"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "record_human_approval",
+    "description": "Record synthetic approval for exactly one record.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string" },
+        "approval_id": { "type": "string" },
+        "expires_at": { "type": "integer" }
+      },
+      "required": ["record_id", "approval_id", "expires_at"],
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string" },
+        "approval_id": { "type": "string" },
+        "expires_at": { "type": "integer" },
+        "approved": { "type": "boolean" }
+      },
+      "required": ["record_id", "approval_id", "expires_at", "approved"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "execute_write",
+    "description": "Apply one synthetic change to a synthetic record.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "record_id": { "type": "string" },
+        "change": {
+          "type": "object",
+          "properties": {
+            "change_id": { "type": "string" },
+            "approval_id": { "type": "string" },
+            "value": { "type": "string" },
+            "force_error": { "type": "boolean" }
+          },
+          "required": ["change_id", "approval_id", "value"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["record_id", "change"],
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "operation_id": { "type": "string" },
+        "record_id": { "type": "string" },
+        "change_id": { "type": "string" },
+        "approval_id": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["operation_id", "record_id", "change_id", "approval_id", "status"],
+      "additionalProperties": false
+    }
+  },
+  {
+    "name": "get_operation_status",
+    "description": "Read the status of a synthetic write operation.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "operation_id": { "type": "string" }
+      },
+      "required": ["operation_id"],
+      "additionalProperties": false
+    },
+    "outputSchema": {
+      "type": "object",
+      "properties": {
+        "operation_id": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["operation_id", "status"],
+      "additionalProperties": false
+    }
+  }
+]

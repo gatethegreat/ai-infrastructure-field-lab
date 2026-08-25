@@ -1,0 +1,11 @@
+run_id,scenario_id,repetition,expected_result,actual_result,expectation_match,false_allow,false_denial,tool_calls_completed,retries_attempted,session_behavior,request_count,stopped_at
+managed_f4af296b59d8b28d,S08,1,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_0068968a2b1d5014,S08,2,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_bdf07f42e3dcd409,S08,3,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_62bea6170fedb9a5,S08,4,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_329e5927e7222d5d,S08,5,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_8f9dd4876abc8ae6,S08,6,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_277bcfd7475af84b,S08,7,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_7e593b5a61d26114,S08,8,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_957eecc4ecbe0f6d,S08,9,mixed,mixed,True,False,False,2,3,single_session,6,retry-3
+managed_8873fb5b8a4f5622,S08,10,mixed,mixed,True,False,False,2,3,single_session,6,retry-3

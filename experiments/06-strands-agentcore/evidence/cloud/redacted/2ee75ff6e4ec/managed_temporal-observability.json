@@ -1,0 +1,210 @@
+{
+  "errors": [
+    "aws/spans query: AWS CLI command failed (logs): aws: [ERROR]: An error occurred (ResourceNotFoundException) when calling the FilterLogEvents operation: The specified log group does not exist."
+  ],
+  "metric_queries": [
+    {
+      "Datapoints": [
+        {
+          "Average": 38.891304347826086,
+          "Maximum": 47.0,
+          "Minimum": 30.0,
+          "SampleCount": 46.0,
+          "Timestamp": "2000-01-01T00:33:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.608695652173914,
+          "Maximum": 49.0,
+          "Minimum": 29.0,
+          "SampleCount": 46.0,
+          "Timestamp": "2000-01-01T00:32:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.61224489795919,
+          "Maximum": 64.0,
+          "Minimum": 29.0,
+          "SampleCount": 49.0,
+          "Timestamp": "2000-01-01T00:30:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.27906976744186,
+          "Maximum": 52.0,
+          "Minimum": 30.0,
+          "SampleCount": 43.0,
+          "Timestamp": "2000-01-01T00:31:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 36.48148148148148,
+          "Maximum": 47.0,
+          "Minimum": 29.0,
+          "SampleCount": 54.0,
+          "Timestamp": "2000-01-01T00:29:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 36.4375,
+          "Maximum": 45.0,
+          "Minimum": 30.0,
+          "SampleCount": 48.0,
+          "Timestamp": "2000-01-01T00:38:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.64705882352941,
+          "Maximum": 87.0,
+          "Minimum": 29.0,
+          "SampleCount": 68.0,
+          "Timestamp": "2000-01-01T00:28:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.17777777777778,
+          "Maximum": 119.0,
+          "Minimum": 29.0,
+          "SampleCount": 45.0,
+          "Timestamp": "2000-01-01T00:37:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 54.57692307692308,
+          "Maximum": 428.0,
+          "Minimum": 30.0,
+          "SampleCount": 26.0,
+          "Timestamp": "2000-01-01T00:27:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.13333333333333,
+          "Maximum": 47.0,
+          "Minimum": 30.0,
+          "SampleCount": 45.0,
+          "Timestamp": "2000-01-01T00:36:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.0,
+          "Maximum": 44.0,
+          "Minimum": 31.0,
+          "SampleCount": 44.0,
+          "Timestamp": "2000-01-01T00:35:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.59574468085106,
+          "Maximum": 98.0,
+          "Minimum": 29.0,
+          "SampleCount": 47.0,
+          "Timestamp": "2000-01-01T00:34:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    },
+    {
+      "Datapoints": [
+        {
+          "Average": 38.891304347826086,
+          "Maximum": 47.0,
+          "Minimum": 30.0,
+          "SampleCount": 46.0,
+          "Timestamp": "2000-01-01T00:33:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.608695652173914,
+          "Maximum": 49.0,
+          "Minimum": 29.0,
+          "SampleCount": 46.0,
+          "Timestamp": "2000-01-01T00:32:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.61224489795919,
+          "Maximum": 64.0,
+          "Minimum": 29.0,
+          "SampleCount": 49.0,
+          "Timestamp": "2000-01-01T00:30:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.27906976744186,
+          "Maximum": 52.0,
+          "Minimum": 30.0,
+          "SampleCount": 43.0,
+          "Timestamp": "2000-01-01T00:31:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 36.48148148148148,
+          "Maximum": 47.0,
+          "Minimum": 29.0,
+          "SampleCount": 54.0,
+          "Timestamp": "2000-01-01T00:29:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 36.4375,
+          "Maximum": 45.0,
+          "Minimum": 30.0,
+          "SampleCount": 48.0,
+          "Timestamp": "2000-01-01T00:38:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.64705882352941,
+          "Maximum": 87.0,
+          "Minimum": 29.0,
+          "SampleCount": 68.0,
+          "Timestamp": "2000-01-01T00:28:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 37.17777777777778,
+          "Maximum": 119.0,
+          "Minimum": 29.0,
+          "SampleCount": 45.0,
+          "Timestamp": "2000-01-01T00:37:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 54.57692307692308,
+          "Maximum": 428.0,
+          "Minimum": 30.0,
+          "SampleCount": 26.0,
+          "Timestamp": "2000-01-01T00:27:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.13333333333333,
+          "Maximum": 47.0,
+          "Minimum": 30.0,
+          "SampleCount": 45.0,
+          "Timestamp": "2000-01-01T00:36:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.0,
+          "Maximum": 44.0,
+          "Minimum": 31.0,
+          "SampleCount": 44.0,
+          "Timestamp": "2000-01-01T00:35:11+00:00",
+          "Unit": "Milliseconds"
+        },
+        {
+          "Average": 38.59574468085106,
+          "Maximum": 98.0,
+          "Minimum": 29.0,
+          "SampleCount": 47.0,
+          "Timestamp": "2000-01-01T00:34:11+00:00",
+          "Unit": "Milliseconds"
+        }
+      ],
+      "Label": "TemporalLatency"
+    }
+  ],
+  "spans": null
+}

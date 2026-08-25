@@ -1,0 +1,2 @@
+run_id,scenario_id,repetition,expected_result,actual_result,expectation_match,false_allow,false_denial,tool_calls_completed,retries_attempted,session_behavior,request_count,stopped_at
+managed_688029fc0316443d,S12,1,rate_limited,inconclusive,False,False,False,5,0,single_session,6,policy_session_contamination_request_6

@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "evidence_kind": "public_redacted_managed_execution",
+  "payloads": "synthetic",
+  "managed_execution": true,
+  "files_processed": 48,
+  "transformations": {
+    "policy_session_identifiers": "replaced_with_non_reversible_placeholder",
+    "aws_request_identifiers": "replaced_with_stable_public_aliases",
+    "mcp_request_identifiers": "replaced_with_stable_public_aliases",
+    "cloud_operation_identifiers": "replaced_with_stable_public_aliases",
+    "cloud_resource_identifiers": "replaced_with_stable_public_aliases",
+    "source_commit_identifiers": "replaced_with_private_source_placeholder",
+    "gateway_identifiers": "replaced_with_stable_public_aliases",
+    "policy_engine_identifiers": "replaced_with_stable_public_aliases",
+    "gateway_urls": "replaced_with_non_resolving_example_urls",
+    "exact_timestamps": "shifted_to_synthetic_anchor_preserving_intervals",
+    "timestamp_anchor": "2000-01-01T00:00:00Z"
+  },
+  "unchanged_measurements": [
+    "authorization_decisions",
+    "tool_outcomes",
+    "scenario_and_repetition_labels",
+    "latency_measurements",
+    "aggregate_counts"
+  ],
+  "event_projection_checks": {
+    "2ee75ff6e4ec/managed_temporal-events.jsonl": {
+      "events": 550,
+      "source_sha256": "99e1b4bae64f495c54b938d9aaa35057ca4e46635a4fa4b4ccad427ecfc2326c",
+      "public_sha256": "99e1b4bae64f495c54b938d9aaa35057ca4e46635a4fa4b4ccad427ecfc2326c",
+      "match": true
+    },
+    "8d21c017f03f/managed_temporal-events.jsonl": {
+      "events": 60,
+      "source_sha256": "c0c8521c4128967e9e651f452703ca9f7d13980e3b4cdf75c0c49a2f29e39441",
+      "public_sha256": "c0c8521c4128967e9e651f452703ca9f7d13980e3b4cdf75c0c49a2f29e39441",
+      "match": true
+    },
+    "dc0d1e456314/gateway_rate_limit-events.jsonl": {
+      "events": 6,
+      "source_sha256": "68a1bcacbe8d93155080d6faba05532707a1cee0496df43694d0457c6e0265e4",
+      "public_sha256": "68a1bcacbe8d93155080d6faba05532707a1cee0496df43694d0457c6e0265e4",
+      "match": true
+    },
+    "e9a8a5293522/gateway_rate_limit-events.jsonl": {
+      "events": 6,
+      "source_sha256": "5bdc5e3fc5baa0d89e52377c37667a2517c8ce4f814f823e691123d4002f7a93",
+      "public_sha256": "5bdc5e3fc5baa0d89e52377c37667a2517c8ce4f814f823e691123d4002f7a93",
+      "match": true
+    },
+    "managed_temporal-events.jsonl": {
+      "events": 533,
+      "source_sha256": "49b9fc284694b384383992affa578a7ba6ff9119477c2fc0a2493af5ef1fbe13",
+      "public_sha256": "49b9fc284694b384383992affa578a7ba6ff9119477c2fc0a2493af5ef1fbe13",
+      "match": true
+    }
+  },
+  "source_values_included": false
+}

@@ -1,0 +1,9 @@
+{
+  "aws_cli": "aws-cli/2.36.4 Python/3.14.6 Windows/11 exe/AMD64",
+  "captured_at": "2000-01-01T00:49:11.807687+00:00",
+  "git_commit": "<PRIVATE_SOURCE_COMMIT>",
+  "git_worktree_dirty": "true",
+  "http_client": "python-standard-library-urllib-single-attempt",
+  "python": "3.12.10",
+  "sigv4": "python-standard-library-hmac-sha256"
+}
