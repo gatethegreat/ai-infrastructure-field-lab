@@ -1,4 +1,4 @@
 dapr-agents==1.0.5
 dapr==1.18.0rc0
-dapr-ext-fastapi==1.18.0rc0
+dapr-ext-fastapi==1.18.3
 dapr-ext-workflow==1.18.0rc0
