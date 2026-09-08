@@ -30,6 +30,7 @@ def direct(worker):
 
 
 def main():
+    (ROOT/'evidence'/'private').mkdir(parents=True,exist_ok=True)
     result={'synthetic_only':True,'prices_are_synthetic':True,'status':'stopped',
             'budget_per_key':0.05,'cost_per_completed_call':0.013,'max_output_tokens':16,
             'repetitive_calls_planned':8,'ordinary_calls_planned':3,'trials':[],
