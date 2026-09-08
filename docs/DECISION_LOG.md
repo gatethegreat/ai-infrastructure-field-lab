@@ -1,5 +1,16 @@
 # Decision Log
 
+## 2026-09-08 - Accept the scoped allowance finding, not the broader comparison
+
+- **Decision:** Prepare writing evidence for the business question of trusting
+  separate AI spending allowances; leave broader Codex and managed adoption open.
+- **Reason:** Three fresh-key local trials blocked repetitive calls while the
+  ordinary key continued. A synthetic $0.05 allowance reached $0.052; all six
+  counters reconciled. See the Experiment 02 ALLOWANCE_RESULT.md and linked JSON.
+- **Consequence:** No further paid calls are needed for this narrow article.
+  Real per-key billing, completed Codex tasks, restart durability and total
+  deployment cost remain unproven. No drafting or publication occurs here.
+
 ## 2026-09-08 - Preserve gateway control caveats before writing
 
 - **Decision:** Accept narrow real-provider API and local control observations,

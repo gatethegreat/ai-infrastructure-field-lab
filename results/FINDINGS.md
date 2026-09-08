@@ -1,5 +1,14 @@
 # Findings
 
+## Latest: spending allowance versus exact ceiling
+
+The [Experiment 02 allowance scenario](../experiments/02-model-operations/ALLOWANCE_RESULT.md)
+repeated the same two-key result three times: ordinary calls continued after
+repetitive calls were denied. All denials avoided provider forwarding and
+persisted synthetic costs reconciled, but the artificial limit was exceeded
+before rejection. This supports a scoped educational finding, not savings,
+production readiness, real billing accuracy or a gateway adoption recommendation.
+
 Experiment 00 established the deterministic, tool-neutral baseline.
 Experiment 01 showed where an environment interface fits around it.
 

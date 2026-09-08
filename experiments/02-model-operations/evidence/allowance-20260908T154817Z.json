@@ -1,0 +1,1459 @@
+{
+  "synthetic_only": true,
+  "prices_are_synthetic": true,
+  "status": "observed",
+  "budget_per_key": 0.05,
+  "cost_per_completed_call": 0.013,
+  "max_output_tokens": 16,
+  "repetitive_calls_planned": 8,
+  "ordinary_calls_planned": 3,
+  "trials": [
+    {
+      "trial": 1,
+      "direct": [
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        }
+      ],
+      "gateway": [
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 532.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 296.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 266.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 281.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 281.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 297.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 266.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 281.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "direct": [
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        }
+      ],
+      "gateway": [
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 281.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 266.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 313.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 296.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 282.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 297.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "direct": [
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "repetitive",
+          "provider_calls": 1
+        },
+        {
+          "http_status": 200,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "cached_tokens": 0
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "reasoning_tokens": 0
+            },
+            "total_tokens": 13
+          },
+          "worker": "ordinary",
+          "provider_calls": 1
+        }
+      ],
+      "gateway": [
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 312.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 313.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 265.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 328.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 266.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 297.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 297.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "repetitive",
+          "http_status": 429,
+          "provider_calls": 0,
+          "elapsed_ms": 281.0,
+          "error_class": "budget"
+        },
+        {
+          "worker": "ordinary",
+          "http_status": 200,
+          "provider_calls": 1,
+          "elapsed_ms": 297.0,
+          "usage": {
+            "input_tokens": 10,
+            "input_tokens_details": {
+              "audio_tokens": null,
+              "cached_tokens": 0,
+              "text_tokens": null
+            },
+            "output_tokens": 3,
+            "output_tokens_details": {
+              "audio_tokens": null,
+              "reasoning_tokens": 0,
+              "text_tokens": null
+            },
+            "total_tokens": 13,
+            "cost": null
+          }
+        }
+      ]
+    }
+  ],
+  "direct_control": "bare API without an application or provider per-key budget",
+  "image_digest": "ghcr.io/berriai/litellm@sha256:c8756e7b9a61fe45df2ccb5b781d388c3b2f3a21ef9e4956630caef20f9f03aa",
+  "accounting": {
+    "identities": [
+      {
+        "key_alias": "ordinary-1",
+        "key_spend": 0.03900000000000001,
+        "max_budget": 0.05,
+        "logged_requests": 3,
+        "logged_spend": 0.039,
+        "input_tokens": 30,
+        "output_tokens": 9
+      },
+      {
+        "key_alias": "ordinary-2",
+        "key_spend": 0.03900000000000001,
+        "max_budget": 0.05,
+        "logged_requests": 3,
+        "logged_spend": 0.039,
+        "input_tokens": 30,
+        "output_tokens": 9
+      },
+      {
+        "key_alias": "ordinary-3",
+        "key_spend": 0.03900000000000001,
+        "max_budget": 0.05,
+        "logged_requests": 3,
+        "logged_spend": 0.039,
+        "input_tokens": 30,
+        "output_tokens": 9
+      },
+      {
+        "key_alias": "repetitive-1",
+        "key_spend": 0.052,
+        "max_budget": 0.05,
+        "logged_requests": 8,
+        "logged_spend": 0.052,
+        "input_tokens": 40,
+        "output_tokens": 12
+      },
+      {
+        "key_alias": "repetitive-2",
+        "key_spend": 0.052,
+        "max_budget": 0.05,
+        "logged_requests": 8,
+        "logged_spend": 0.052,
+        "input_tokens": 40,
+        "output_tokens": 12
+      },
+      {
+        "key_alias": "repetitive-3",
+        "key_spend": 0.052,
+        "max_budget": 0.05,
+        "logged_requests": 8,
+        "logged_spend": 0.052,
+        "input_tokens": 40,
+        "output_tokens": 12
+      }
+    ],
+    "request_accounting": [
+      {
+        "key_alias": "ordinary-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "ordinary-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-1",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-2",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "repetitive-3",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "counters_reconciled": true,
+  "summary": [
+    {
+      "trial": 1,
+      "worker": "ordinary",
+      "direct_completed": 3,
+      "gateway_completed": 3,
+      "gateway_rejected": 0,
+      "direct_synthetic_cost": 0.039,
+      "gateway_synthetic_cost": 0.039
+    },
+    {
+      "trial": 1,
+      "worker": "repetitive",
+      "direct_completed": 8,
+      "gateway_completed": 4,
+      "gateway_rejected": 4,
+      "direct_synthetic_cost": 0.104,
+      "gateway_synthetic_cost": 0.052
+    },
+    {
+      "trial": 2,
+      "worker": "ordinary",
+      "direct_completed": 3,
+      "gateway_completed": 3,
+      "gateway_rejected": 0,
+      "direct_synthetic_cost": 0.039,
+      "gateway_synthetic_cost": 0.039
+    },
+    {
+      "trial": 2,
+      "worker": "repetitive",
+      "direct_completed": 8,
+      "gateway_completed": 4,
+      "gateway_rejected": 4,
+      "direct_synthetic_cost": 0.104,
+      "gateway_synthetic_cost": 0.052
+    },
+    {
+      "trial": 3,
+      "worker": "ordinary",
+      "direct_completed": 3,
+      "gateway_completed": 3,
+      "gateway_rejected": 0,
+      "direct_synthetic_cost": 0.039,
+      "gateway_synthetic_cost": 0.039
+    },
+    {
+      "trial": 3,
+      "worker": "repetitive",
+      "direct_completed": 8,
+      "gateway_completed": 4,
+      "gateway_rejected": 4,
+      "direct_synthetic_cost": 0.104,
+      "gateway_synthetic_cost": 0.052
+    }
+  ],
+  "containers_remaining": ""
+}

@@ -1,7 +1,20 @@
-# Research status: not yet ready for the final article
+# Research status: scoped allowance evidence ready; broader comparison incomplete
 
 Updated 2026-09-08. Reader: business owners and team leads. This is evidence
 inventory, not an article draft or a deployment recommendation.
+
+## Latest decision: focused allowance scenario
+
+The [three-trial allowance test](ALLOWANCE_RESULT.md) now supports a narrower
+business article: one key's repetitive requests were blocked while another
+key continued, with reconciled synthetic accounting. The $0.05 artificial
+budget reached $0.052 before rejection. This is useful control, not an exact
+billing guarantee. No new paid inference was used.
+
+The earlier final-comparison gates below still apply to a completed Codex
+workflow, real per-key provider billing, or AWS deployment recommendation.
+Those claims are excluded from the scoped article; this is not a declaration
+that the full experiment is complete.
 
 ## What the evidence supports
 

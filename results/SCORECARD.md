@@ -1,5 +1,13 @@
 # Comparison Scorecard
 
+## Latest Experiment 02 allowance result
+
+**PARTIAL:** three fresh-key trials in one local deployment blocked repetitive
+consumption without blocking the ordinary key; synthetic $0.05 allowances reached
+$0.052 before denial. Six key counters reconciled. Exact ceilings, concurrent
+overshoot, real billing, Codex task completion and managed durability are not
+established. [Evidence and scope](../experiments/02-model-operations/ALLOWANCE_RESULT.md).
+
 Allowed statuses: `PROVEN`, `PARTIAL`, `ABSENT`, `NOT TESTED`.
 
 Every non-`NOT TESTED` status must link to experiment evidence. Capture measured
