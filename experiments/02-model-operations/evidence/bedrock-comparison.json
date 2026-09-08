@@ -1,0 +1,18 @@
+{
+  "model": "us.openai.gpt-5.6-luna",
+  "upstream_endpoint": "https://bedrock-runtime.us-east-1.amazonaws.com/openai/v1",
+  "synthetic_only": true,
+  "records": [],
+  "status": "stopped",
+  "automatic_retries": 0,
+  "limitations": [
+    "Compatibility smoke only; sample count cannot establish p50/p95.",
+    "Not a Codex CLI end-to-end test or managed gateway policy proof."
+  ],
+  "error_type": "InternalServerError",
+  "http_status": 503,
+  "attempts": 1,
+  "known_usage_estimated_usd": 0,
+  "usage_complete": false,
+  "gateway_process_stopped": true
+}

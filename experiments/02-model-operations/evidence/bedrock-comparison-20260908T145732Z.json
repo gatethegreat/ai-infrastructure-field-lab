@@ -1,0 +1,120 @@
+{
+  "model": "us.openai.gpt-5.6-luna",
+  "upstream_endpoint": "https://bedrock-runtime.us-east-1.amazonaws.com/openai/v1",
+  "synthetic_only": true,
+  "records": [
+    {
+      "path": "direct",
+      "case": "text",
+      "status": "completed",
+      "latency_ms": 8753.825,
+      "first_text_ms": null,
+      "input_tokens": 20,
+      "output_tokens": 17,
+      "estimated_usd_upper": 2.794e-05
+    },
+    {
+      "path": "direct",
+      "case": "continuation",
+      "status": "completed",
+      "latency_ms": 5590.246,
+      "first_text_ms": null,
+      "input_tokens": 57,
+      "output_tokens": 7,
+      "estimated_usd_upper": 2.4914999999999998e-05
+    },
+    {
+      "path": "direct",
+      "case": "stream",
+      "status": "completed",
+      "latency_ms": 19256.753,
+      "first_text_ms": 13051.050099995336,
+      "input_tokens": 12,
+      "output_tokens": 6,
+      "estimated_usd_upper": 1.1220000000000001e-05
+    },
+    {
+      "path": "direct",
+      "case": "tool_call",
+      "status": "completed",
+      "latency_ms": 16377.954,
+      "first_text_ms": null,
+      "input_tokens": 47,
+      "output_tokens": 19,
+      "estimated_usd_upper": 3.8005e-05
+    },
+    {
+      "path": "direct",
+      "case": "tool_result",
+      "status": "completed",
+      "latency_ms": 11710.498,
+      "first_text_ms": null,
+      "input_tokens": 68,
+      "output_tokens": 7,
+      "estimated_usd_upper": 2.7940000000000004e-05
+    },
+    {
+      "path": "gateway",
+      "case": "text",
+      "status": "completed",
+      "latency_ms": 31475.317,
+      "first_text_ms": null,
+      "input_tokens": 20,
+      "output_tokens": 20,
+      "estimated_usd_upper": 3.19e-05
+    },
+    {
+      "path": "gateway",
+      "case": "continuation",
+      "status": "completed",
+      "latency_ms": 29396.349,
+      "first_text_ms": null,
+      "input_tokens": 60,
+      "output_tokens": 21,
+      "estimated_usd_upper": 4.422e-05
+    },
+    {
+      "path": "gateway",
+      "case": "stream",
+      "status": "completed",
+      "latency_ms": 1911.501,
+      "first_text_ms": 1657.600899998215,
+      "input_tokens": 12,
+      "output_tokens": 6,
+      "estimated_usd_upper": 1.1220000000000001e-05
+    },
+    {
+      "path": "gateway",
+      "case": "tool_call",
+      "status": "completed",
+      "latency_ms": 14710.915,
+      "first_text_ms": null,
+      "input_tokens": 47,
+      "output_tokens": 19,
+      "estimated_usd_upper": 3.8005e-05
+    },
+    {
+      "path": "gateway",
+      "case": "tool_result",
+      "status": "completed",
+      "latency_ms": 1838.634,
+      "first_text_ms": null,
+      "input_tokens": 68,
+      "output_tokens": 7,
+      "estimated_usd_upper": 2.7940000000000004e-05
+    }
+  ],
+  "status": "passed",
+  "automatic_retries": 0,
+  "limitations": [
+    "Compatibility smoke only; sample count cannot establish p50/p95.",
+    "Not a Codex CLI end-to-end test or managed gateway policy proof."
+  ],
+  "attempts": 10,
+  "known_usage_estimated_usd": 0.000283305,
+  "usage_complete": true,
+  "gateway_process_stopped": true,
+  "unknown_usage_reserved_usd": 0.0,
+  "reservation_is_not_billed_cost": true,
+  "recorded_at_utc": "2026-09-08T14:57:32Z"
+}

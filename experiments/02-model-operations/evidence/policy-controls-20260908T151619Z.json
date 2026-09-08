@@ -1,0 +1,96 @@
+{
+  "synthetic_only": true,
+  "prices_are_synthetic": true,
+  "checks": [
+    {
+      "case": "allowed",
+      "http_status": 200,
+      "provider_requests": 1
+    },
+    {
+      "case": "forbidden_model",
+      "http_status": 403,
+      "provider_requests": 1
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 1,
+      "http_status": 200,
+      "provider_requests": 2
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 2,
+      "http_status": 429,
+      "provider_requests": 2
+    },
+    {
+      "case": "other_identity_after_budget",
+      "http_status": 200
+    },
+    {
+      "case": "budget_after_restart",
+      "http_status": 429,
+      "provider_requests": 3
+    },
+    {
+      "case": "provider_stopped",
+      "http_status": 500,
+      "elapsed_ms": 14875.0
+    },
+    {
+      "case": "provider_restored",
+      "http_status": 200,
+      "elapsed_ms": 31.0
+    }
+  ],
+  "status": "observed",
+  "image_digest": "ghcr.io/berriai/litellm@sha256:c8756e7b9a61fe45df2ccb5b781d388c3b2f3a21ef9e4956630caef20f9f03aa",
+  "accounting_before_outage": {
+    "identities": [
+      {
+        "key_alias": "team-a",
+        "key_spend": 0.026,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.026,
+        "input_tokens": 20,
+        "output_tokens": 6
+      },
+      {
+        "key_alias": "team-b",
+        "key_spend": 0,
+        "max_budget": 1,
+        "logged_requests": 1,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "accounting_after_recovery": {
+    "identities": [
+      {
+        "key_alias": "team-a",
+        "key_spend": 0.026,
+        "max_budget": 0.02,
+        "logged_requests": 5,
+        "logged_spend": 0.026,
+        "input_tokens": 20,
+        "output_tokens": 6
+      },
+      {
+        "key_alias": "team-b",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 3,
+        "logged_spend": 0.026,
+        "input_tokens": 31,
+        "output_tokens": 6
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "containers_remaining": ""
+}

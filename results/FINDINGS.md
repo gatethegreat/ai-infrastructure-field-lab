@@ -5,6 +5,13 @@ Experiment 01 showed where an environment interface fits around it.
 
 ## Confirmed strengths
 
+- Experiment 02 now has real Bedrock five-case direct/local-gateway API proof
+  and local model, rate and key-budget rejection evidence. Its
+  [current research status](../experiments/02-model-operations/RESEARCH_STATUS.md)
+  also records synthetic budget overshoot, a timing-dependent restart
+  accounting discrepancy, and an incomplete actual Codex task. These are not
+  managed deployment or production-readiness claims.
+
 - Plain typed contracts and JSON fixtures are sufficient for the shared
   happy path and approval boundary.
 - A proposal fingerprint can bind approval to the exact simulated action.

@@ -1,0 +1,456 @@
+{
+  "synthetic_only": true,
+  "prices_are_synthetic": true,
+  "checks": [
+    {
+      "case": "allowed",
+      "http_status": 200,
+      "provider_requests": 1
+    },
+    {
+      "case": "forbidden_model",
+      "http_status": 403,
+      "provider_requests": 1
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 1,
+      "http_status": 200,
+      "provider_requests": 2
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 2,
+      "http_status": 429,
+      "provider_requests": 2
+    },
+    {
+      "case": "other_identity_after_budget",
+      "http_status": 200,
+      "provider_requests": 3
+    },
+    {
+      "case": "rate_probe",
+      "attempt": 1,
+      "http_status": 200,
+      "provider_requests": 4
+    },
+    {
+      "case": "rate_probe",
+      "attempt": 2,
+      "http_status": 429,
+      "provider_requests": 4
+    },
+    {
+      "case": "budget_after_restart",
+      "http_status": 429,
+      "provider_requests": 5
+    },
+    {
+      "case": "provider_stopped",
+      "http_status": 500,
+      "elapsed_ms": 14937.0
+    },
+    {
+      "case": "provider_restored",
+      "http_status": 200,
+      "elapsed_ms": 46.0
+    },
+    {
+      "case": "burst_budget_after_settlement",
+      "http_status": 200
+    }
+  ],
+  "status": "observed",
+  "settle_before_restart": true,
+  "image_digest": "ghcr.io/berriai/litellm@sha256:c8756e7b9a61fe45df2ccb5b781d388c3b2f3a21ef9e4956630caef20f9f03aa",
+  "concurrent_budget_http_statuses": [
+    429,
+    429,
+    200,
+    429
+  ],
+  "accounting_before_restart": {
+    "identities": [
+      {
+        "key_alias": "burst",
+        "key_spend": 0.013,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 2,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "key_spend": 0.026,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.026,
+        "input_tokens": 20,
+        "output_tokens": 6
+      },
+      {
+        "key_alias": "team-b",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 1,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      }
+    ],
+    "request_accounting": [
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "rate",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-b",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "accounting_before_outage": {
+    "identities": [
+      {
+        "key_alias": "burst",
+        "key_spend": 0.013,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 2,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "key_spend": 0.026,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.026,
+        "input_tokens": 20,
+        "output_tokens": 6
+      },
+      {
+        "key_alias": "team-b",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 1,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      }
+    ],
+    "request_accounting": [
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "rate",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-b",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "accounting_after_recovery": {
+    "identities": [
+      {
+        "key_alias": "burst",
+        "key_spend": 0.013,
+        "max_budget": 0.02,
+        "logged_requests": 4,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "key_spend": 0.013,
+        "max_budget": 1,
+        "logged_requests": 2,
+        "logged_spend": 0.013,
+        "input_tokens": 10,
+        "output_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "key_spend": 0.026,
+        "max_budget": 0.02,
+        "logged_requests": 5,
+        "logged_spend": 0.026,
+        "input_tokens": 20,
+        "output_tokens": 6
+      },
+      {
+        "key_alias": "team-b",
+        "key_spend": 0.026,
+        "max_budget": 1,
+        "logged_requests": 3,
+        "logged_spend": 0.026,
+        "input_tokens": 31,
+        "output_tokens": 6
+      }
+    ],
+    "request_accounting": [
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "burst",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "rate",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "rate",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-a",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 0,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-b",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      },
+      {
+        "key_alias": "team-b",
+        "status": "failure",
+        "spend": 0,
+        "prompt_tokens": 11,
+        "completion_tokens": 0
+      },
+      {
+        "key_alias": "team-b",
+        "status": "success",
+        "spend": 0.013,
+        "prompt_tokens": 10,
+        "completion_tokens": 3
+      }
+    ],
+    "rows_containing_prompt_canary": 0
+  },
+  "gateway_console_contains_prompt_canary": false,
+  "containers_remaining": ""
+}

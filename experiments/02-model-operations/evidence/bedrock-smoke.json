@@ -1,0 +1,16 @@
+{
+  "model": "us.openai.gpt-5.6-luna",
+  "endpoint": "https://bedrock-runtime.us-east-1.amazonaws.com/openai/v1",
+  "synthetic_only": true,
+  "max_output_tokens": 256,
+  "attempts": 1,
+  "price_source": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-56-luna.html",
+  "input_usd_per_million": 0.275,
+  "output_usd_per_million": 1.32,
+  "status": "completed",
+  "expected_text": true,
+  "latency_ms": 14950.08,
+  "input_tokens": 12,
+  "output_tokens": 6,
+  "estimated_usd_upper": 1.1220000000000001e-05
+}

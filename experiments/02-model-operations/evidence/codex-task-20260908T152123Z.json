@@ -1,0 +1,27 @@
+{
+  "synthetic_only": true,
+  "model": "us.openai.gpt-5.6-luna",
+  "records": [
+    {
+      "attempt": 1,
+      "request_bytes": 36678,
+      "content_type": "text/event-stream; charset=utf-8",
+      "response_bytes": 65366,
+      "http_status": 200,
+      "elapsed_ms": 1156.0
+    }
+  ],
+  "max_requests": 4,
+  "max_output_tokens_per_request": 256,
+  "stream_buffering": true,
+  "status": "stopped",
+  "exit_code": 1,
+  "task_elapsed_ms": 2406.0,
+  "final_answer": "",
+  "successful_file_read": false,
+  "answer_contains_expected_percentages": false,
+  "known_usage_estimated_usd": 0,
+  "unknown_usage_reserved_usd": 0.05,
+  "gateway_process_stopped": true,
+  "container_remaining": ""
+}

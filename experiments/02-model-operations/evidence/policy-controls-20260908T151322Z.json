@@ -1,0 +1,35 @@
+{
+  "synthetic_only": true,
+  "prices_are_synthetic": true,
+  "checks": [
+    {
+      "case": "allowed",
+      "http_status": 200
+    },
+    {
+      "case": "forbidden_model",
+      "http_status": 403
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 1,
+      "http_status": 200
+    },
+    {
+      "case": "budget_probe",
+      "attempt": 2,
+      "http_status": 429
+    },
+    {
+      "case": "other_identity_after_budget",
+      "http_status": 200
+    },
+    {
+      "case": "budget_after_restart",
+      "http_status": 429
+    }
+  ],
+  "status": "observed",
+  "image_digest": "ghcr.io/berriai/litellm@sha256:c8756e7b9a61fe45df2ccb5b781d388c3b2f3a21ef9e4956630caef20f9f03aa",
+  "containers_remaining": ""
+}

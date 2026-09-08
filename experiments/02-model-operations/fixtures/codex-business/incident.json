@@ -1,0 +1,8 @@
+{
+  "synthetic": true,
+  "service": "checkout-api",
+  "requests": 1000,
+  "failed_requests": 75,
+  "failed_requests_after_rollback": 5,
+  "requests_after_rollback": 1000
+}

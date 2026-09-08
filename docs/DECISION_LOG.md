@@ -1,5 +1,18 @@
 # Decision Log
 
+## 2026-09-08 - Preserve gateway control caveats before writing
+
+- **Decision:** Accept narrow real-provider API and local control observations,
+  but keep the blog and gateway adoption decision open.
+- **Reason:** Local restrictions worked, yet synthetic budgets overshot before
+  denial and immediate restart left recent key counters behind spend logs.
+  Waiting for persistence before restart preserved correct counters. The
+  actual Codex task exposed unsupported web search and test-shell setup issues,
+  followed by repeated provider-capacity errors after configuration changes.
+- **Consequence:** Stop the current paid retries; preserve failed evidence and
+  complete the real task, cost analysis, and separately approved managed tests
+  before recommending deployment. See Experiment 02 RESEARCH_STATUS.md.
+
 Record decisions derived from research evidence. Do not record preferences as
 facts or adoption decisions before the applicable experiment completes.
 

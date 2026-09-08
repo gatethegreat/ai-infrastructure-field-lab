@@ -121,7 +121,30 @@ Secrets Manager, KMS, and model inference. Its own documentation says direct
 IAM Identity Center is the lowest-complexity path when native AWS identity and
 audit controls are enough.
 
-## Adoption gate
+## Additional research evidence, September 8
+
+See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current claim boundary,
+[AWS_STAGE_A_RESULT.md](AWS_STAGE_A_RESULT.md) for real-provider compatibility,
+[BUSINESS_RESEARCH_PLAN.md](BUSINESS_RESEARCH_PLAN.md) for reader questions,
+and [COST_WORKSHEET.md](COST_WORKSHEET.md) for explicitly incomplete estimates.
+Local key-budget, rate-limit, model restriction, accounting and restart probes
+now exist. Managed gateway deployment and a final adoption recommendation do not.
+
+Reproduce local controls with Docker running:
+
+```powershell
+python experiments/02-model-operations/run_policy_controls.py
+python experiments/02-model-operations/run_policy_controls.py --settle-before-restart
+```
+
+These use synthetic provider prices, a disposable PostgreSQL database, and a
+loopback gateway. They remove only their named containers, database volume and
+network afterward. Downloaded images remain cached. Raw logs are ignored under
+`evidence/private/`; public JSON contains selected synthetic aggregates only.
+Scripts for Bedrock and actual Codex require separate valid inference approval
+and a reconciled request ledger before every run. Do not run them as unit tests.
+
+## Adoption gate (managed)
 
 Recommend the gateway only if the managed evidence proves at least one current
 requirement that the direct path cannot meet acceptably:
