@@ -1,0 +1,13 @@
+model_list:
+  - model_name: synthetic-codex
+    litellm_params:
+      model: openai/synthetic-codex
+      api_base: http://127.0.0.1:4010/v1
+      api_key: local-synthetic-provider-key
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  set_verbose: false
+  drop_params: false

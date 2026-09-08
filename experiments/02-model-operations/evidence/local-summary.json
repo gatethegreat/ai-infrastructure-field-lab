@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "experiment": "02-model-operations-local",
+  "generated_at": "2026-09-08T14:06:07Z",
+  "synthetic_only": true,
+  "litellm_version": "1.100.0",
+  "sample_count": 20,
+  "stream_sample_count": 10,
+  "direct": {
+    "text_total_latency": {
+      "samples": 20,
+      "p50_ms": 0.749,
+      "p95_ms": 15.295,
+      "min_ms": 0.579,
+      "max_ms": 21.953
+    },
+    "stream_time_to_first_event": {
+      "samples": 10,
+      "p50_ms": 0.932,
+      "p95_ms": 1.155,
+      "min_ms": 0.561,
+      "max_ms": 1.172
+    },
+    "stream_total_latency": {
+      "samples": 10,
+      "p50_ms": 17.257,
+      "p95_ms": 17.815,
+      "min_ms": 16.845,
+      "max_ms": 18.07
+    },
+    "stream_event_types": [
+      "response.created",
+      "response.output_text.delta",
+      "response.completed"
+    ],
+    "continuation_succeeded": true,
+    "previous_response_id_forwarded": true,
+    "forced_tool_call_preserved": true,
+    "controlled_error_status": 429
+  },
+  "gateway": {
+    "text_total_latency": {
+      "samples": 20,
+      "p50_ms": 23.965,
+      "p95_ms": 31.524,
+      "min_ms": 7.243,
+      "max_ms": 31.742
+    },
+    "stream_time_to_first_event": {
+      "samples": 10,
+      "p50_ms": 17.614,
+      "p95_ms": 37.863,
+      "min_ms": 7.59,
+      "max_ms": 42.356
+    },
+    "stream_total_latency": {
+      "samples": 10,
+      "p50_ms": 32.231,
+      "p95_ms": 47.075,
+      "min_ms": 22.461,
+      "max_ms": 47.243
+    },
+    "stream_event_types": [
+      "response.created",
+      "response.output_text.delta",
+      "response.completed"
+    ],
+    "continuation_succeeded": true,
+    "previous_response_id_forwarded": true,
+    "forced_tool_call_preserved": true,
+    "controlled_error_status": 429
+  },
+  "gateway_incremental_p50_ms": 23.216,
+  "gateway_outage_failed_closed": true,
+  "direct_survived_gateway_outage": true,
+  "status": "passed"
+}

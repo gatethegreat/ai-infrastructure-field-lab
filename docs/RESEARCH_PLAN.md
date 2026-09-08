@@ -141,11 +141,12 @@ Learn:
 
 ### 02 — Model operations necessity
 
-The necessity gate is complete without installing a gateway. The current lab
-has one agent and one provider, and no present requirement for centralized
-credentials, budgets, routing policy, or cross-application model records. Keep
-the direct provider adapter. Defer LiteLLM, Portkey, and provider-fallback tests
-until the user explicitly requests them for a real requirement.
+The experiment was explicitly reopened on 2026-09-08 to test AWS's Codex +
+LiteLLM + Amazon Bedrock gateway pattern. The local synthetic phase passed the
+Responses contract, latency, mapped-error, and outage probes. The managed phase
+must compare direct Bedrock access with the gateway before any adoption or
+article conclusion; AWS authentication, model access, cost, and cloud approval
+remain open gates.
 
 Learn:
 
@@ -155,10 +156,10 @@ Learn:
 - whether direct calls plus application telemetry are already sufficient; and
 - which observability or evaluation question, if any, remains afterward.
 
-Reopen this experiment only if evidence demonstrates at least one current need:
-two or more providers, centralized credentials or budgets, cross-application
-policy, tested fallback, or shared model-call observability. Otherwise retain
-direct provider calls and record the no-gateway decision.
+Adopt only if managed evidence demonstrates at least one current need: two or
+more providers, centralized credentials or budgets, cross-application policy,
+tested fallback, or shared model-call observability. Otherwise retain direct
+provider calls and record the no-gateway decision.
 
 ### 03 — Dapr Agents
 
@@ -377,9 +378,10 @@ solution. One unfamiliar or inconvenient tool is not sufficient evidence.
 
 ## Next action
 
-Experiments 00 and 01 are complete. Experiment 02 closed at its necessity gate:
-retain direct provider calls and defer gateway and fallback testing until
-explicitly requested for a real requirement. Experiment 03 proved the
+Experiments 00 and 01 are complete. Experiment 02 is reopened: its local
+LiteLLM comparison passed, while the direct-Bedrock-versus-ECS managed phase is
+gated on AWS authentication, model access, reviewed cost, and explicit cloud
+approval. Experiment 03 proved the
 underlying Dapr Workflow recovery behaviors but rejected Dapr Agents `1.0.5`
 after its official durable trigger required a compatibility shim. Experiment
 04's current Workflow 5 official entry gate compiled and ran locally but exposed

@@ -7,20 +7,20 @@ values such as minutes, services, changed files, and cost where applicable.
 
 | Dimension | Baseline | OpenEnv | Model operations | Dapr Agents | Vercel | PydanticAI + DBOS | Strands + AgentCore | LangGraph | Microsoft Agent Framework | Restate |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Setup effort | NOT TESTED | [PARTIAL](../experiments/01-openenv/evidence/openenv-environment.json) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/evidence/dapr-environment.json) | [PARTIAL](../experiments/04-vercel/evidence/official-minimal.json) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/local/dogwood/environment.json) | NOT TESTED | NOT TESTED | NOT TESTED |
-| Application coupling | NOT TESTED | [PARTIAL](../experiments/01-openenv/README.md#architecture-and-responsibility-boundaries) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/README.md#architecture-and-separation) | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
+| Setup effort | NOT TESTED | [PARTIAL](../experiments/01-openenv/evidence/openenv-environment.json) | [PARTIAL](../experiments/02-model-operations/README.md#local-result) | [PARTIAL](../experiments/03-dapr-agents/evidence/dapr-environment.json) | [PARTIAL](../experiments/04-vercel/evidence/official-minimal.json) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/local/dogwood/environment.json) | NOT TESTED | NOT TESTED | NOT TESTED |
+| Application coupling | NOT TESTED | [PARTIAL](../experiments/01-openenv/README.md#architecture-and-responsibility-boundaries) | [PARTIAL](../experiments/02-model-operations/README.md#business-question) | [PARTIAL](../experiments/03-dapr-agents/README.md#architecture-and-separation) | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
 | Model portability | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
-| Local development | NOT TESTED | [PROVEN](../experiments/01-openenv/evidence/verification.txt) | NOT TESTED | [PROVEN](../experiments/03-dapr-agents/evidence/verification.txt) | [PARTIAL](../experiments/04-vercel/README.md#entry-gate-evidence) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/README.md#local-results) | NOT TESTED | NOT TESTED | NOT TESTED |
+| Local development | NOT TESTED | [PROVEN](../experiments/01-openenv/evidence/verification.txt) | [PROVEN](../experiments/02-model-operations/evidence/local-summary.json) | [PROVEN](../experiments/03-dapr-agents/evidence/verification.txt) | [PARTIAL](../experiments/04-vercel/README.md#entry-gate-evidence) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/README.md#local-results) | NOT TESTED | NOT TESTED | NOT TESTED |
 | Durability and recovery | [ABSENT](../experiments/00-baseline/README.md#initial-storage) | [ABSENT](../experiments/01-openenv/README.md#findings-limitations-and-decision) | NOT TESTED | [PROVEN](../experiments/03-dapr-agents/evidence/recovery-probe.json) | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
 | Human approval | [PROVEN](../experiments/00-baseline/evidence/verification.txt) | [PROVEN](../experiments/01-openenv/evidence/verification.txt) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/evidence/recovery-probe.json) | NOT TESTED | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/README.md#limitations-and-untested-claims) | NOT TESTED | NOT TESTED | NOT TESTED |
 | State and audit | [PARTIAL](../experiments/00-baseline/evidence/happy-path.jsonl) | [PARTIAL](../experiments/01-openenv/evidence/incident-trajectory.json) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/evidence/recovery-probe.json) | [PARTIAL](../experiments/04-vercel/evidence/official-minimal.json) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/cloud/redacted/accepted-managed-comparison.csv) | NOT TESTED | NOT TESTED | NOT TESTED |
 | Observability | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/cloud/redacted/8d21c017f03f/managed_temporal-observability.json) | NOT TESTED | NOT TESTED | NOT TESTED |
 | Evaluation | NOT TESTED | [PARTIAL](../experiments/01-openenv/evidence/incident-trajectory.json) | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
-| Security boundaries | [PARTIAL](../experiments/00-baseline/evidence/verification.txt) | [PARTIAL](../experiments/01-openenv/evidence/verification.txt) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/evidence/verification.txt) | NOT TESTED | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/cloud/redacted/accepted-managed-comparison.csv) | NOT TESTED | NOT TESTED | NOT TESTED |
+| Security boundaries | [PARTIAL](../experiments/00-baseline/evidence/verification.txt) | [PARTIAL](../experiments/01-openenv/evidence/verification.txt) | [PARTIAL](../experiments/02-model-operations/evidence/local-summary.json) | [PARTIAL](../experiments/03-dapr-agents/evidence/verification.txt) | NOT TESTED | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/evidence/cloud/redacted/accepted-managed-comparison.csv) | NOT TESTED | NOT TESTED | NOT TESTED |
 | Deployment and rollback | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | [PROVEN](../experiments/06-strands-agentcore/README.md#cloud-boundary) | NOT TESTED | NOT TESTED | NOT TESTED |
 | Data ownership | [PROVEN](../experiments/00-baseline/README.md#architecture) | [PROVEN](../experiments/01-openenv/README.md#architecture-and-responsibility-boundaries) | NOT TESTED | [PROVEN](../experiments/03-dapr-agents/README.md#architecture-and-separation) | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED | NOT TESTED |
-| Cost | [PARTIAL](../experiments/00-baseline/README.md#version-and-primary-sources) | [PARTIAL](../experiments/01-openenv/README.md#versions-and-primary-sources) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/evidence/dapr-environment.json) | [PARTIAL](../experiments/04-vercel/evidence/official-minimal.json) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/infrastructure/cost-estimate.template.json) | NOT TESTED | NOT TESTED | NOT TESTED |
-| Missing glue | [PARTIAL](../experiments/00-baseline/README.md#findings-and-limitations) | [PARTIAL](../experiments/01-openenv/README.md#findings-limitations-and-decision) | NOT TESTED | [PARTIAL](../experiments/03-dapr-agents/README.md#current-findings-and-limitations) | [PARTIAL](../experiments/04-vercel/README.md#entry-gate-evidence) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/README.md#limitations-and-untested-claims) | NOT TESTED | NOT TESTED | NOT TESTED |
+| Cost | [PARTIAL](../experiments/00-baseline/README.md#version-and-primary-sources) | [PARTIAL](../experiments/01-openenv/README.md#versions-and-primary-sources) | [PARTIAL](../experiments/02-model-operations/README.md#managed-phase-gate) | [PARTIAL](../experiments/03-dapr-agents/evidence/dapr-environment.json) | [PARTIAL](../experiments/04-vercel/evidence/official-minimal.json) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/infrastructure/cost-estimate.template.json) | NOT TESTED | NOT TESTED | NOT TESTED |
+| Missing glue | [PARTIAL](../experiments/00-baseline/README.md#findings-and-limitations) | [PARTIAL](../experiments/01-openenv/README.md#findings-limitations-and-decision) | [PARTIAL](../experiments/02-model-operations/RESEARCH_PLAN.md#evidence-matrix) | [PARTIAL](../experiments/03-dapr-agents/README.md#current-findings-and-limitations) | [PARTIAL](../experiments/04-vercel/README.md#entry-gate-evidence) | NOT TESTED | [PARTIAL](../experiments/06-strands-agentcore/README.md#limitations-and-untested-claims) | NOT TESTED | NOT TESTED | NOT TESTED |
 
 ## Measured comparison notes
 
@@ -56,6 +56,22 @@ and the reasoning behind each status.
 - The environment adapter still supplies transitions, reward design, approval,
   and effects. Docker, server transport, recovery, deployment, and aggregated
   evaluation were not tested.
+
+### Experiment 02 — Model operations
+
+- LiteLLM `1.100.0` passed the same synthetic Responses workload as the direct
+  provider: text, SSE streaming, continuation, forced read-only tool call, and
+  mapped HTTP 429.
+- Across 20 loopback text requests, direct latency was 0.749 ms p50 and 15.295 ms
+  p95; gateway latency was 23.965 ms p50 and 31.524 ms p95. The incremental
+  median was 23.216 ms.
+- Across 10 loopback streams, time to first event was 0.932 ms p50 direct and
+  17.614 ms p50 through the gateway.
+- Stopping LiteLLM made the gateway path fail while direct access still worked.
+  This proves an extra local failure boundary, not production availability.
+- AWS authentication was unavailable. Bedrock compatibility, hard budgets,
+  identity attribution, real cost, routing, recovery, and cloud teardown remain
+  untested behind the managed approval gate.
 
 ### Experiment 03 — Dapr Agents
 

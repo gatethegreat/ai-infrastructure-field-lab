@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-09-08T13:45:00Z",
+  "privacy_safe": true,
+  "tools": {
+    "aws_cli": "2.36.4",
+    "docker_cli": "29.4.2",
+    "python": "3.12.10",
+    "node": "24.19.0",
+    "codex_cli": "0.153.4"
+  },
+  "docker_engine_available": false,
+  "aws_authenticated": false,
+  "bedrock_model_access_queried": false,
+  "cloud_resources_created": false,
+  "paid_model_requests_made": false,
+  "next_gate": "Authenticate an approved AWS profile, verify Bedrock model access, review cost and teardown scope, then obtain explicit cloud-run approval."
+}

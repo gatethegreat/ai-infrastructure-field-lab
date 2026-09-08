@@ -234,3 +234,18 @@ facts or adoption decisions before the applicable experiment completes.
   completed agent loop. Compare the pinned stable-compatible line next; adapt
   the shared scenario only if it is materially cleaner. External Vercel
   resources and paid usage remain behind their separate approval gate.
+
+## 2026-09-08 — Reopen the gateway experiment and separate local from managed proof
+
+- **Decision:** Reopen Experiment 02 for the explicitly requested Codex gateway
+  study. Run a synthetic direct-versus-LiteLLM control locally, but keep the
+  Amazon Bedrock and ECS comparison behind the existing cloud approval gate.
+- **Reason:** AWS's current reference makes centralized budgets, rate limits,
+  identity attribution, routing, and telemetry concrete enough to test. The
+  real decision still requires measuring the operational cost and failure
+  boundary against direct Bedrock access.
+- **Consequence:** The local LiteLLM `1.100.0` phase is accepted as partial
+  contract and overhead evidence: it passed text, streaming, continuation,
+  forced-tool, mapped-error, and outage probes, with 23.216 ms incremental p50
+  text latency. No adoption decision is allowed until the authenticated managed
+  comparison tests controls, real latency, cost, recovery, and teardown.

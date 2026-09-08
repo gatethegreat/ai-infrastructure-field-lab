@@ -36,6 +36,13 @@ Experiment 01 showed where an environment interface fits around it.
   generated steps, completed three recorded local steps, and retained the
   completed run for CLI inspection after the server stopped. This proves the
   local compiler, execution, file backend, and inspection path only.
+- LiteLLM `1.100.0` preserved the synthetic Responses text, streaming,
+  continuation, forced read-only tool-call, and mapped 429 cases. Its median
+  local text path was 23.965 ms versus 0.749 ms direct, an incremental 23.216
+  ms in this deterministic loopback test.
+- Stopping LiteLLM made the gateway route unavailable while the same synthetic
+  provider remained reachable directly, confirming the extra local failure
+  boundary without any cloud or business-side effect.
 
 ## Confirmed limitations
 
@@ -50,9 +57,10 @@ Experiment 01 showed where an environment interface fits around it.
   in-memory environment.
 - TensorZero is no longer maintained, so its former gateway, observability, and
   evaluation combination cannot be treated as a current production candidate.
-- A model gateway is not currently required for the lab's one-agent,
-  one-provider scope. Provider fallback remains a plausible future requirement,
-  not a reason to operate another service before it is requested.
+- The local gateway pass does not prove hard budgets, identity attribution,
+  routing, production availability, Bedrock compatibility, or AWS cost. Those
+  claims require the gated managed comparison; local latency is proxy overhead,
+  not representative model latency.
 - Dapr Agents `1.0.5` is not acceptable as the production agent framework for
   this lab: its official durable trigger required a compatibility shim against
   both its locked and stable workflow SDKs.
